@@ -9,8 +9,9 @@ class NetflixQueueProcessor
 
     queue = netflix_user.instant_disc_queue
 
-    queues.discs.each do |disc|
-      Netflix
+    # process each movie within here..
+    queues.discs.each do |movie|
+
     end
 
   end
