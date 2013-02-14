@@ -1,0 +1,70 @@
+<h1>Sign Up</h1>
+<p>
+  Signing up is simple and free. Enter your email address and answer a few questions. 
+  We will never sell your information or spam you.
+</p>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div id="email">
+    <div class="choices-header" id="email-header">
+      Your Email
+    </div>
+    <div class="choices-box" id="email-box">
+      <%= f.email_field :email %>
+    </div>
+  </div>
+
+  <div id="password">
+    <div class="choices-header" id="password-header">
+      Pick a password
+    </div>
+    <div class="choices-box" id="password-box">
+      <%= f.password_field :password %>
+    </div>
+  </div>
+
+  <div id="work">
+    <div class="choices-header" id="work-choices-header">
+      When do you work?
+    </div>
+    <div class="choices-box" id="work-choices-box">
+      <ul>
+        <li class="choice" data-choice-type="work" data-choice="ninetofive">Nine to Fiveish</li>
+        <li class="choice" data-choice-type="work" data-choice="nights">Nights</li>
+        <li class="choice" data-choice-type="work" data-choice="weekends">Weekends</li>
+        <li class="choice" data-choice-type="work" data-choice="inspiration">When I&apos;m inspired</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="weekdaymorning">
+    <div class="choices-header" id="weekdaymorning-choices-header">
+      A good, typical weekday morning?
+    </div>
+    <div class="choices-box" id="weekdaymorning-choices-box">
+      <ul>
+        <li class="choice" data-choice-type="weekdaymorning" data-choice="earlybird">Early to rise, I may go for a run or swim...</li>
+        <li class="choice" data-choice-type="weekdaymorning" data-choice="getupgetout">Get up, get ready, go to work</li>
+        <li class="choice" data-choice-type="weekdaymorning" data-choice="casual">Casual, but a routine</li>
+        <li class="choice" data-choice-type="weekdaymorning" data-choice="later">I get up later</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="weeknight">
+    <div class="choices-header" id="weeknight-choices-header">
+      A nice, typical weeknight
+    </div>
+    <div class="choices-box" id="weeknight-choices-box">
+      <ul>
+        <li class="choice" data-choice-type="weeknight" data-choice="sleep">I come home only to sleep</li>
+        <li class="choice" data-choice-type="weeknight" data-choice="homebody">I like spending time at my house</li>
+        <li class="choice" data-choice-type="weeknight" data-choice="switchitup">I switch it up</li>
+      </ul>
+    </div>
+  </div>
+
+  <div><%= f.submit "Sign up" %></div>
+<% end %>

@@ -1,0 +1,285 @@
+html, body {
+	height: 100%;
+}
+
+body {
+  margin:0;
+  padding:0;
+  color:#333;
+  font-size:15px;
+	font-family:Georgia, Serif;
+  background:#FFF;
+}
+
+div,ul,li,p,dd,dt,dl,h1,h2,h3 {
+  font-size:1em;
+  font-style:normal;
+  font-weight:normal;
+  list-style-type:none;
+  background-repeat:no-repeat;
+  background-position:0 0;
+}
+
+a, a:visited{text-decoration:none; color:#1896d3;}
+a:hover{text-decoration:underline; color:#1896d3;}
+
+#container {
+  width:550px;
+	margin:0px auto;
+	min-height: 100%;
+	position: relative;
+}
+
+#title {
+	font-family:"Myriad Pro", "Helvetica Neue";
+  text-shadow:1px 1px 1px #999;
+  font-size:40px;
+	font-weight:bold;
+}
+
+#content {
+  line-height:22px;
+	width:600px;
+	padding:0 40px 0 0;
+	float:left;
+}
+
+#gutter {
+	width:300px;
+	float:right;
+}
+
+.gutter-box {
+	font-size:17px;
+	margin:0 0 5px 0;
+	padding:0;
+}
+
+#header {
+  padding:40px 0 0 0;
+}
+
+#navigation {
+	width:300px;
+	float:right;
+}
+
+#navigation ul {
+	padding:0;
+	margin:17px 0 0 0;
+}
+
+#navigation li {
+	margin:0 20px 0 0;
+	background-color:#CCE4F7;
+	border-top:1px solid #CCC;
+	border-left:1px solid #CCC;
+	border-bottom:1px solid #CCC;
+	border-right:1px solid #CCC;
+	display:inline-block;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	float:left;
+}
+
+#navigation li:hover {
+	background-color:#DAEDFB;
+}
+
+#navigation a, #navigation a:visited, #navigation a:active, #navigation a:hover {
+	text-decoration:none;
+	display:block;
+	padding:5px 12px;
+  color:#666;
+	font-size:13px;
+	font-family:"Lucida Grande",​Calibri,​Helvetica,​Arial,​sans-serif;
+}
+
+.clearfooter {
+	height: 230px;
+	clear:both;
+}
+
+#footer {
+	background-color: #6d6e71;
+	height: 330px;
+	position: relative;
+}
+
+#footer a, #footer a:hover, #footer a:visited {
+  color: #5fa6dc;
+}
+
+#footer-container {
+  width:940px;
+	margin:0px auto;
+	padding-top:50px;
+	font-size:13px;
+	font-weight:400;
+	color:#EEE;
+}
+
+#footer li {
+	float:left;
+	width:313px;
+}
+
+h1{
+	font-family:"Myriad Pro", "Helvetica Neue";
+  color:#000;
+  font-size:36px;
+	margin:0;
+}
+
+h1 a, h1 a:visited{
+	color:#000;
+}
+
+h2 {
+  color:#333;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-size:32px;
+}
+
+li i{padding-right:15px;}
+
+h3,dt{
+  color:#666;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-size:24px;
+  margin:0;
+  padding:0;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+	font-size:18px;
+	padding:10px;
+	margin:5px 0;
+	width:500px;
+	background-color: hsl(0, 0, 98);
+	border:1px solid hsl(0, 0, 80);
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+
+input[type="submit"] {
+	font-size:32px;
+	padding:10px;
+	margin:5px 0;
+	width:521px;
+	background-color: #EEE;
+	border:1px solid #CCC;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+}
+
+p {
+	font-size:16px;
+  margin:0;
+  padding:5px 0px;
+}
+
+.form-field {
+	width:500px;
+	clear:both;
+}
+
+.section {
+	clear:both;
+}
+
+.small {
+	font-size:13px;
+}
+
+textarea {
+	width:500px;
+	height:300px;
+	font-size:14px;
+	padding:3px;
+	border: 1px solid #CCC;
+	font-family:Georgia;
+  font-size:14px;
+  line-height:21px;
+}
+
+#email {
+
+	.day {
+
+		.day-header {
+
+		}
+		.day-box {
+
+			.day-item {
+
+				.day-suggestion {
+
+				}
+				.day-timing {
+					width:150px;
+					float:right;
+					text-align:left;
+				}
+			}
+		}
+		.day-feedback {
+
+			.day-feedback-good {
+
+			}
+			.day-feedback-bad {
+
+			}
+		}
+	}
+}
+
+.choices-header, .section-header {
+  color:#666;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-size:32px;
+
+  p {
+    font-size:17px;
+  }
+}
+.choices-box, .section-box {
+	margin-bottom:16px;
+
+   ul {
+    margin:0;
+    padding:0;
+  }
+}
+#signup-box li {
+  float:left;
+  padding:11px;
+  margin:5px;
+  width:230px;
+  background-color: #EEE;
+  border:1px solid #CCC;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  text-align: center;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+#signup-header p {
+  line-height:24px;
+}
+
+.choice, .suggestion {
+	padding:10px;
+	margin:5px 0;
+	width:500px;
+	background-color: #EEE;
+	border:1px solid #CCC;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+}
+
+.choice:hover, .choice:active, .suggestion:hover, .suggestion:active, .selected {
+	background-color: #CCC;
+	border:1px solid #999;
+}

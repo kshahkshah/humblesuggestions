@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h2><%= @idea.name %></h2>
+
+
+<%- ::Context.all.each do |context| %>
+<h3><%= context.name %></h3>
+<table>
+  <tr>
+    <td>Option</td>
+    <td>Weight</td>
+  </tr>  
+<% context.context_options.each do |option| %>
+  <tr>
+    <td><%= option.name %></td>
+    <td>
+      <% if ideaweight = IdeaWeight.where(:context_id => context.id).where(:idea_id => @idea.id).where(:context_option_id => option.id).first %>
+        <%= ideaweight.weight %>
+      <%- end  %>
+    </td>
+  </tr>  
+<% end  %>
+</table>
+
+<% end  %>
+
+
+<%= link_to 'Edit', edit_idea_path(@idea) %> |
+<%= link_to 'Back', ideas_path %>

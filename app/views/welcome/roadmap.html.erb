@@ -1,0 +1,164 @@
+<h1>version 1: static ideas and simple contexts</h1>
+
+<h2>Overview</h2>
+
+You already have tons of things you know you want, can, or should do. 
+I am not here to suggest curated content for your consumption. 
+Instead take simple contexts of time, day, location
+and what I know about myself to make suggestions of what do do now.
+
+<h3>Features</h3>
+<ul>
+  <li>preset non-personalized suggestions</li>
+  <li>suggestions are weighted by various contexts</li>
+</ul>
+
+<h2>Backend</h2>
+
+<h3>transmission</h3>
+
+<strong>xhr post with time/location</strong>
+<pre>
+  {time: 15, location: 'home'}
+</pre>
+
+<strong>return array of hashes</strong>
+<pre>
+  [
+    {time: 15, idea: 'read magazine article', weight: 10},
+    {time: 15, idea: 'call mom', weight: 5},
+    {time: 15, idea: 'make dinner plans', weight: 1}
+  ]
+</pre>
+
+<h3>logic</h3>
+
+<strong>apply context multipliers</strong>
+<pre>
+  weight(idea A) = 
+    (current day X contexts(idea a)[day]) X (current time X contexts(idea a)[time]) X (...other contexts...)
+
+  contexts(idea A) = 
+    {
+      time:     {morning: 1, noon: 1, afternoon: 2, evening: 1, night: 0},
+      day:      {monday-friday: 1, saturday-sunday: 2},
+      location: {home: 1, work: 0}
+    }
+</pre>
+
+<h3>models</h3>
+
+<strong>ideas</strong>
+holds ideas like 'read a book, 'call a friend'
+
+<pre>
+  id:         integer
+  name:       string
+  created_at: date
+  updated_at: date
+</pre>
+
+<strong>contexts</strong>
+holds contexts like 'location', 'time', 'day'
+
+<pre>
+  id:   integer
+  name: string
+</pre>
+
+<strong>contexts_options</strong>
+holds options of a context like 'morning', 'afternoon', 'night'
+
+<pre>
+  id:         integer
+  context_id: integer
+  name:       string
+</pre>
+
+<strong>idea_weights</strong>
+holds weights for an option like 'morning' for a context like 'time' for an idea like 'read a book'
+
+<pre>
+  id:                 integer
+  idea_id:            integer
+  context_id:         integer
+  context_option_id:  integer
+  weight:             integer
+</pre>
+
+<h2>Front End</h2>
+
+<h3>Presentation</h3>
+<ul>
+  <li>present contexts and choices</li>
+  <li>present suggestions</li>
+</ul>
+
+<h1>version 1.5: record feedback and get more ideas</h1>
+
+<h2>Overview</h2>
+
+<p>
+  version 1 is good, but the universe of ideas is small and I quickly cycle 
+  through the suggestions. I'd like to be able to suggest ideas for myself and 
+  the community.
+</p>
+
+<h3>Features</h3>
+<ul>
+  <li>Accounts ('Users') allows us to keep track of feedback and other UGC</li>
+  <li>Users can add suggest ideas and contexts for them</li>
+</ul>
+
+<h2>Backend</h2>
+
+<h3>models</h3>
+
+<strong>ideas</strong> is expanded to hold a created_by field
+
+<pre>
+  created_by: integer
+</pre>
+
+<strong>users</strong> holds user accounts
+
+<pre>
+  id:     integer
+  email:  string
+  admin:  boolean, false
+  ... devise fields
+</pre>
+
+
+<h1>version 2.0: dynamic ideas and feedback</h1>
+
+<h2>Overview</h2>
+
+<p>version 1.5 is good, but I often cycle through things I can't do or 
+don't want to do in order to find good ideas. For example, there is 
+no point in suggesting that I call my mother when I'm at work just 
+because I have fifteen minutes if she is working right now or lives 
+across the world and is sleeping.</p>
+
+<h3>Features</h3>
+<ul>
+  <li>Skip suggestions are recorded, with reasons as per rejection</li>
+  <li>Personalization context</li>
+</ul>
+
+<h3>allow content to be added "suggested" (user generated)</h3>
+
+* create users
+* ask for gender
+
+* record passovers (I don't want to do this at all vs. I don't want to do this right now)
+  - new context multipliers to consider
+    idea A X personal_multiplier X community_multiplier
+
+* connect to calendar (supplement how much time do you have)
+* set workplace location
+* set work schedule (9-5)
+* set home location
+* enable geolocation
+
+* suggest content via connected sources (instapaper)
