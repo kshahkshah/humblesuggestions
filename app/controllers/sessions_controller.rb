@@ -1,7 +1,12 @@
 class SessionsController < ApplicationController
   def create
-    @user = User.find_or_create_from_auth_hash(auth_hash)
-    sign_in_and_redirect(@user)
+    if current_user
+      current_user.add_service_from_auth_hash(auth_hash)
+      redirect_to '/'
+    else
+      @user = User.find_or_create_from_auth_hash(auth_hash)
+      sign_in_and_redirect(@user)
+    end
   end
 
   protected

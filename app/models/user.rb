@@ -26,12 +26,9 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :email, :case_sensitive => false, :allow_blank => true, :if => :email_changed?
   validates_format_of :email, :with => Devise.email_regexp, :allow_blank => true, :if => :email_changed?
-  validates_presence_of :password, :on => :save, :allow_blank => true
-  validates_confirmation_of :password, :on => :save, :allow_blank => true
-  validates_length_of :password, :within => Devise.password_length, :allow_blank => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :name, :email, :password, :remember_me
   # attr_accessible :title, :body
 
   def self.find_or_create_from_auth_hash(auth_hash)
@@ -68,6 +65,17 @@ class User < ActiveRecord::Base
     return @user if @user
   end
 
+  def add_service_from_auth_hash(auth_hash)
+    self.email = auth_hash.info.email if self.email.blank?
+    self.send("#{auth_hash.provider}_user_id=", auth_hash.uid)
+    self.send("#{auth_hash.provider}_token=", auth_hash.credentials.token)
+    self.send("#{auth_hash.provider}_secret=", auth_hash.credentials.secret)
+    self.save
+  end
+
+  def connected?
+    netflix_connected? or instapaper_connected?
+  end
   def netflix_connected?
     !self.netflix_user_id.blank?
   end
@@ -89,4 +97,11 @@ class User < ActiveRecord::Base
     Resque.enqueue("InstapaperQueueProcessor", self.id)
   end
 
+  def update_with_password(params={}) 
+    if params[:password].blank? 
+      params.delete(:password) 
+    end 
+    update_attributes(params) 
+    clean_up_passwords
+  end
 end

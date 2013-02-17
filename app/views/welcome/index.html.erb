@@ -5,12 +5,19 @@
   </div>
   <div class="section-box" id="signup-box">
     <% if current_user.email.blank? %>
-    <input type="email" id="signup-email" placeholder="enter your email to receive timed reminders...">
+
+    <%= form_for(current_user, :url => registration_path(current_user), :html => { :method => :put, :id => 'edit_user' }) do |f| %>
+       <%= f.email_field :email, :id => 'edit_email', :placeholder => 'enter your email to receive timed reminders...' %>
+       <%= f.password_field :password, :id => 'edit_password', :placeholder => 'enter a password' %>
+       <%= f.submit %>
     <% end %>
+
+    <% end %>
+    <% unless current_user.instapaper_connected? && current_user.netflix_connected? %>
     <ul>
       <li>
         <% if current_user.instapaper_connected? %>
-        processing your instapaper list...
+        connected to your Instapaper list...
         <% else %>
         click for articles saved on your...<br />
         <h4><%= link_to 'Instapaper', '/auth/instapaper' %></h4>
@@ -18,13 +25,14 @@
       </li>
       <li>
         <% if current_user.netflix_connected? %>
-        processing your netflix queue...
+        connected to your Netflix queue...
         <% else %>
         click for movies on your queue at...<br />
         <h4><%= link_to 'Netflix', '/auth/netflix' %></h4>
         <% end %>
       </li>
     </ul>
+    <% end %>
   </div>
 <% elsif !current_user %>
   <div class="section-header" id="signup-header">
@@ -44,13 +52,21 @@
         </li>
       </ul>
     </div>
+
+  <div class="section-header" id="signin-header">
+    <h3>Already Signed Up?</h3>
+  </div>
+  <div class="section-box" id="signin-box">
+    <p><%= link_to "Click here to sign in", new_user_session_path %></p>
+  </div>
 <% end %>
 </div>
 
 <div id="suggestions" style="display:none;">
 </div>
 
-<div id="time" class="section" style="display:none;">
+<% if current_user && current_user.connected? %>
+<div id="time" class="section">
   <h2>How much time do you have?</h2>
   <div class="choices-header" id="time-choices-header">
   </div>
@@ -65,7 +81,7 @@
   </div>
 </div>
 
-<div id="location" class="section" style="display:none;">
+<div id="location" class="section">
   <h2>Where are you?</h2>
   <div class="choices-header" id="location-choices-header">
   </div>
@@ -77,3 +93,4 @@
     </ul>
   </div>
 </div>
+<% end %>
