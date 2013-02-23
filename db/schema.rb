@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130213060922) do
+ActiveRecord::Schema.define(:version => 20130220060333) do
+
+  create_table "content_suggestions", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "content_type"
+    t.string   "content_provider"
+    t.string   "content_id"
+    t.string   "title"
+    t.text     "description"
+    t.string   "image"
+    t.string   "rating"
+    t.string   "position"
+    t.string   "time_added"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
   create_table "context_options", :force => true do |t|
     t.integer  "context_id"
@@ -41,6 +56,16 @@ ActiveRecord::Schema.define(:version => 20130213060922) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
+
+  create_table "sessions", :force => true do |t|
+    t.string   "session_id", :null => false
+    t.text     "data"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "users", :force => true do |t|
     t.string   "email"
