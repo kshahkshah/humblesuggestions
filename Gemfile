@@ -5,6 +5,8 @@ gem 'annotate'
 gem 'pg'
 gem 'rails', '3.2.11'
 gem 'resque'
+gem 'statsample'
+gem 'gsl', :git => 'git://github.com/30robots/rb-gsl.git'
 gem 'debugger'
 gem 'pry'
 
@@ -13,7 +15,7 @@ gem 'devise'
 gem 'omniauth'
 
 # services
-gem 'netflix', git: 'git://github.com/whistlerbrk/netflix-ruby.git'
+gem 'netflix', path: '../netflix-ruby'
 gem 'omniauth-netflix'
 
 gem 'instapaper'
