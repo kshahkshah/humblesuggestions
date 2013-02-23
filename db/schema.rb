@@ -63,6 +63,8 @@ ActiveRecord::Schema.define(:version => 20130213060922) do
     t.string   "instapaper_token"
     t.string   "instapaper_secret"
     t.string   "name"
+    t.string   "netflix_status"
+    t.string   "instapaper_status"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

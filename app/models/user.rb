@@ -31,38 +31,28 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :remember_me
   # attr_accessible :title, :body
 
+  has_many :content_suggestions
+
   def self.find_or_create_from_auth_hash(auth_hash)
     # first check if we have that user via that provider...
     @user = User.where("#{auth_hash.provider}_user_id" => auth_hash.uid).first
-
-    # great we have a user, return it
     return @user if @user
 
-    # what if they are connecting a different service and already have an account?
+    # can't find one, but what if they are connecting a different service and already have an account?
     # well, do a look up by email first then merge the accounts
     if @user = User.where(email: auth_hash.info.email).first
-      # add to this account...
-      @user.send("#{auth_hash.provider}_user_id=", auth_hash.uid)
-      @user.send("#{auth_hash.provider}_token=", auth_hash.credentials.token)
-      @user.send("#{auth_hash.provider}_secret=", auth_hash.credentials.secret)
-      @user.save
+      @user.add_service_from_auth_hash(auth_hash)
     end
-
-    # fantastic, return the user...
+    # then return the user...
     return @user if @user
 
-    # snap, still no user, welcome aboard...
+    # snap, still no user, well then welcome aboard...
     @user = User.new({
       email: auth_hash.info.email,
       name:  auth_hash.info.name
-    })
-
-    @user.send("#{auth_hash.provider}_user_id=", auth_hash.uid)
-    @user.send("#{auth_hash.provider}_token=", auth_hash.credentials.token)
-    @user.send("#{auth_hash.provider}_secret=", auth_hash.credentials.secret)
-    @user.save
- 
+    }).add_service_from_auth_hash(auth_hash)
     return @user if @user
+
   end
 
   def add_service_from_auth_hash(auth_hash)
@@ -71,30 +61,44 @@ class User < ActiveRecord::Base
     self.send("#{auth_hash.provider}_token=", auth_hash.credentials.token)
     self.send("#{auth_hash.provider}_secret=", auth_hash.credentials.secret)
     self.save
+    self.send("process_#{auth_hash.provider}_queue")
   end
 
   def connected?
     netflix_connected? or instapaper_connected?
   end
+
+  def netflix_connecting?
+    netflix_status.eql?("processing")
+  end
+  def instapaper_connecting?
+    instapaper_status.eql?("processing")
+  end
+
   def netflix_connected?
-    !self.netflix_user_id.blank?
+    netflix_status.eql?("processed")
   end
   def instapaper_connected?
-    !self.instapaper_user_id.blank?
+    instapaper_status.eql?("processed")
   end
 
-  def process_netflix_queue!
-    NetflixQueueProcessor.perform(self.id)
+  def process_netflix_queue(queue = false)
+    if Rails.env.production? or queue
+      Resque.enqueue("NetflixQueueProcessor", self.id)
+      self.netflix_status = 'processing'
+    else
+      NetflixQueueProcessor.perform(id)
+      self.netflix_status = 'processed'
+    end
   end
-  def process_instapaper_queue!
-    InstapaperQueueProcessor.perform(self.id)
-  end
-
-  def process_netflix_queue
-    Resque.enqueue("NetflixQueueProcessor", self.id)
-  end
-  def process_instapaper_queue
-    Resque.enqueue("InstapaperQueueProcessor", self.id)
+  def process_instapaper_queue(queue = false)
+    if Rails.env.production? or queue
+      Resque.enqueue("InstapaperQueueProcessor", self.id)
+      self.instapaper_status = 'processing'
+    else
+      InstapaperQueueProcessor.perform(id)
+      self.instapaper_status = 'processed'
+    end
   end
 
   def update_with_password(params={}) 
