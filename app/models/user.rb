@@ -31,6 +31,8 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :remember_me
   # attr_accessible :title, :body
 
+  after_create Proc.new {|u| UserMailer.welcome_email(u).deliver }
+
   has_many :content_suggestions
 
   def self.find_or_create_from_auth_hash(auth_hash)
@@ -62,6 +64,10 @@ class User < ActiveRecord::Base
     self.send("#{auth_hash.provider}_secret=", auth_hash.credentials.secret)
     self.save
     self.send("process_#{auth_hash.provider}_queue")
+  end
+
+  def display_name
+    name.blank? ? email.split("@").first : name.split(" ").first rescue "friend"
   end
 
   def connected?

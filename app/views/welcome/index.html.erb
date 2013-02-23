@@ -1,7 +1,7 @@
 <div id="user" class="section">
 <%- if current_user %>
   <div class="section-header" id="user-header">
-    <h3>Hello <span contenteditable='true' id='username'><%= current_user.name.blank? ? current_user.email.split("@").first : current_user.name.split(" ").first %>,</span></h3>
+    <h3>Hello <span contenteditable='true' id='username'><%= current_user.display_name %>,</span></h3>
   </div>
   <div class="section-box" id="signup-box">
     <% if current_user.email.blank? %>
