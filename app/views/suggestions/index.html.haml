@@ -1,0 +1,25 @@
+- content_for :head do
+  = javascript_include_tag("jquery.tablesorter")
+  :plain
+    <script>
+      $(document).ready(function() 
+        { 
+          $("#contentsuggestions").tablesorter(); 
+        } 
+      ); 
+    </script>
+
+
+%table{:class => "tablesorter", :id => "contentsuggestions"}
+  %thead
+    %th Title
+    %th Rating
+    %th Position
+    %th Weighting
+  %tbody
+    - @content.each do |content|
+      %tr
+        %td= content.title
+        %td= content.rating
+        %td= content.position
+        %td= Math.sqrt(content.position.to_f*10) * content.rating.to_f*content.rating.to_f

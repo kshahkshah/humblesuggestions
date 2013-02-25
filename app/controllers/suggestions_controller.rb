@@ -10,4 +10,8 @@ class SuggestionsController < ApplicationController
     render :json => @suggestions.to_json
   end
 
+  def index
+    @content = current_user.content_suggestions
+  end
+
 end
