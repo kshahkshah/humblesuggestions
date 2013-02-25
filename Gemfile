@@ -1,15 +1,23 @@
 source 'https://rubygems.org'
 
 # core
-gem 'annotate'
-gem 'pg'
 gem 'rails', '3.2.11'
+
+# backend
+gem 'pg'
+gem 'redis'
 gem 'resque'
+
+# front end
+gem 'jquery-rails'
+gem 'haml'
+
+# statistics
 gem 'statsample'
 gem 'gsl', :git => 'git://github.com/30robots/rb-gsl.git'
-gem 'jquery-rails'
 
 # development
+gem 'annotate'
 gem 'debugger'
 gem 'pry'
 gem 'mailcatcher'
