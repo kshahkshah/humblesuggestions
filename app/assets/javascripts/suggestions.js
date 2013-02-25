@@ -9,6 +9,8 @@ $(document).ready(function(){
 		win: function(position) {
 			latitude 	= position.coords.latitude;
 			longitude = position.coords.longitude;
+			$.cookie('latitude', latitude);
+			$.cookie('longitude', longitude);
 		}, 
 		fail: function(position) {
 		}

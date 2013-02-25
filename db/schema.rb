@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130220060333) do
+ActiveRecord::Schema.define(:version => 20130225073522) do
 
   create_table "content_suggestions", :force => true do |t|
     t.integer  "user_id"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(:version => 20130220060333) do
     t.string   "time_added"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.datetime "suggested_on"
+    t.string   "suggested_via"
   end
 
   create_table "context_options", :force => true do |t|
@@ -90,6 +92,9 @@ ActiveRecord::Schema.define(:version => 20130220060333) do
     t.string   "name"
     t.string   "netflix_status"
     t.string   "instapaper_status"
+    t.string   "last_location"
+    t.string   "last_latitude"
+    t.string   "last_longitude"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
