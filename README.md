@@ -64,10 +64,6 @@ Otherwise css is scss here and is found in `./app/assets/` and the layout and ot
 * write logic for daily admin note (signups, signups with completed services, other statistics)
 * write middleware for enqueueuing daily scrapes for each user
 
-#### for initial launch ####
-* set up foreman or some process runner
-* resque-scheduler or cron alternative
-
 #### 0.1 ####
 * signup from web with confirmation email
 * add instapaper scraper
@@ -81,3 +77,6 @@ Otherwise css is scss here and is found in `./app/assets/` and the layout and ot
 * add contexts to email
 * admin dashboard for viewing contexts vs email statistics
 
+#### for initial launch ####
+* set up foreman or some process runner
+* resque-scheduler or cron alternative
