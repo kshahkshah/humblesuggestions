@@ -1,20 +1,21 @@
 GIT
-  remote: git://github.com/30robots/rb-gsl.git
-  revision: ba998baac6956fc139103a69b1508fddc2b06a88
-  specs:
-    gsl (1.14.7)
-      narray (>= 0.5.9)
-
-PATH
-  remote: ../netflix-ruby
+  remote: git://github.com/whistlerbrk/netflix-ruby.git
+  revision: e752c5b0f2a4151602188007aa8286887993e071
   specs:
     netflix (0.2.1)
       json
       launchy
       oauth
 
+GIT
+  remote: git://github.com/whistlerbrk/rb-gsl.git
+  revision: 062436bb188046862dfa4d697d45ddc73ceaf54a
+  specs:
+    gsl (1.14.7)
+      narray (>= 0.5.9)
+
 GEM
-  remote: https://rubygems.org/
+  remote: http://rubygems.org/
   specs:
     actionmailer (3.2.11)
       actionpack (= 3.2.11)
@@ -57,16 +58,16 @@ GEM
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.4.0)
+    coffee-script-source (1.5.0)
     columnize (0.3.6)
     daemons (1.1.9)
-    debugger (1.3.1)
+    debugger (1.3.3)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.1.1)
-      debugger-ruby_core_source (~> 1.1.8)
+      debugger-ruby_core_source (~> 1.2.0)
     debugger-linecache (1.1.2)
       debugger-ruby_core_source (>= 1.1.1)
-    debugger-ruby_core_source (1.1.8)
+    debugger-ruby_core_source (1.2.0)
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -79,7 +80,7 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     extendmatrix (0.3.1)
-    faraday (0.8.5)
+    faraday (0.8.6)
       multipart-post (~> 1.1)
     faraday_middleware (0.9.0)
       faraday (>= 0.7.4, < 0.9)
@@ -87,7 +88,7 @@ GEM
     haml (3.1.8)
     hashie (1.2.0)
     hike (1.2.1)
-    i18n (0.6.1)
+    i18n (0.6.2)
     instapaper (0.3.0)
       faraday_middleware (~> 0.7)
       multi_json (~> 1)
@@ -118,7 +119,7 @@ GEM
     minimization (0.2.1)
       text-table (~> 1.2)
     multi_json (1.6.1)
-    multipart-post (1.1.5)
+    multipart-post (1.2.0)
     narray (0.6.0.7)
     oauth (0.4.7)
     omniauth (1.1.3)
@@ -179,7 +180,7 @@ GEM
     rake (10.0.3)
     rash (0.3.2)
       hashie (~> 1.2.0)
-    rdoc (3.12.1)
+    rdoc (3.12.2)
       json (~> 1.4)
     redis (3.0.2)
     redis-namespace (1.2.1)
@@ -203,7 +204,7 @@ GEM
       sass (>= 3.1.10)
       tilt (~> 1.3)
     simple_oauth (0.2.0)
-    sinatra (1.3.4)
+    sinatra (1.3.5)
       rack (~> 1.4)
       rack-protection (~> 1.3)
       tilt (~> 1.3, >= 1.3.3)

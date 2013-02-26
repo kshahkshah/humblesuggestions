@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 # core
 gem 'rails', '3.2.11'
@@ -14,7 +14,7 @@ gem 'haml'
 
 # statistics
 gem 'statsample'
-gem 'gsl', :git => 'git://github.com/30robots/rb-gsl.git'
+gem 'gsl', :git => 'git://github.com/whistlerbrk/rb-gsl.git'
 
 # development
 gem 'annotate'
@@ -27,7 +27,7 @@ gem 'devise'
 gem 'omniauth'
 
 # services
-gem 'netflix', path: '../netflix-ruby'
+gem 'netflix', :git => "git://github.com/whistlerbrk/netflix-ruby.git"
 gem 'omniauth-netflix'
 
 gem 'instapaper'
