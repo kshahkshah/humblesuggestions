@@ -1,6 +1,10 @@
 class NetflixQueueProcessor
   @queue = :processors
 
+  def self.clean(str)
+    str.chars.select{|i| i.valid_encoding?}.join
+  end
+
   def self.perform(user_id)
     @user = User.find(user_id)
 
@@ -22,13 +26,11 @@ class NetflixQueueProcessor
       map = disc.send(:instance_variable_get, :@map)
 
       if suggestion = ContentSuggestion.find_by_content_id(disc.id)
-        suggestion.attributes({
-          title:            disc.title,
-          description:      map["link"].select{|l|l["synopsis"]}.first["synopsis"],
-          image:            map["box_art"]["large"],
-          rating:           disc.average_rating,
-          position:         disc.position,
-        })
+        suggestion.title = self.clean(disc.title.to_s)
+        suggestion.description = self.clean(map["link"].select{|l|l["synopsis"]}.first["synopsis"].to_s)
+        suggestion.image = map["box_art"]["large"]
+        suggestion.rating = disc.average_rating
+        suggestion.position = disc.position
         if suggestion.changed?
           puts "changed, saving"
           suggestion.save
@@ -40,8 +42,8 @@ class NetflixQueueProcessor
           content_type:     'video',
           content_provider: 'netflix',
           content_id:       disc.id,
-          title:            disc.title,
-          description:      map["link"].select{|l|l["synopsis"]}.first["synopsis"],
+          title:            self.clean(disc.title.to_s),
+          description:      self.clean(map["link"].select{|l|l["synopsis"]}.first["synopsis"].to_s),
           image:            map["box_art"]["large"],
           rating:           disc.average_rating,
           position:         disc.position,
