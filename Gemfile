@@ -7,6 +7,7 @@ gem 'rails', '3.2.11'
 gem 'pg'
 gem 'redis'
 gem 'resque'
+gem 'whenever'
 
 # front end
 gem 'jquery-rails'

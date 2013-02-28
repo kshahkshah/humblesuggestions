@@ -3,7 +3,7 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
-#  email                  :string(255)      default(""), not null
+#  email                  :string(255)
 #  encrypted_password     :string(255)      default(""), not null
 #  reset_password_token   :string(255)
 #  reset_password_sent_at :datetime
@@ -13,8 +13,21 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
+#  authentication_token   :string(255)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  netflix_user_id        :string(255)
+#  netflix_token          :string(255)
+#  netflix_secret         :string(255)
+#  instapaper_user_id     :string(255)
+#  instapaper_token       :string(255)
+#  instapaper_secret      :string(255)
+#  name                   :string(255)
+#  netflix_status         :string(255)
+#  instapaper_status      :string(255)
+#  last_location          :string(255)
+#  last_latitude          :string(255)
+#  last_longitude         :string(255)
 #
 
 class User < ActiveRecord::Base
