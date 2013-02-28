@@ -1,20 +1,34 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Humble Suggestions</title>
-    <%= stylesheet_link_tag    "application", :media => "all" %>
-    <%= javascript_include_tag "application" %>
-    <% if content_for(:head) %>
-    <%= yield :head %>
-    <% end %>
-    <%= csrf_meta_tags %>
-  </head>
-  <body>
-    <div id="container">
-      <div id="title">Humble Suggestions</div>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-      <%= yield %>
-    </div>
-  </body>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+	<head>
+		<meta charset="utf-8" />
+		<!-- Uncomment to make IE8 render like IE7 -->
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+		<!-- Set the viewport width to device width for mobile -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title><%= content_for?(:title) ? yield(:title) : "Humble Suggestions" %></title>
+		<%= stylesheet_link_tag    "application" %>
+		<%= javascript_include_tag "application" %>
+	  <%= yield(:head) if content_for?(:head) %>
+	  <%= csrf_meta_tags %>
+	</head>
+	<body>
+		<div class="row header">
+			<div class="twelve columns">
+				<h1 id="title">Humble Suggestions</h1>
+			</div>
+		</div>
+		<% if alert %><div class="row alert"><%= alert %></div><% end %>
+		<% if notice %><div class="row notice"><%= notice %></div><% end %>
+		<div class="row content">
+			<div class="twelve columns"><%= yield %></div>
+		</div>
+		<div class="row footer">
+			<div class="twelve columns">&copy; 2013 Kunal A Shah</div>
+		</div>
+	</body>
 </html>
