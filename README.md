@@ -54,29 +54,3 @@ Start the server `rails s` and navigate to localhost:3000 in your browser and yo
 I think you've worked in a rails app before so this final section is a bit sparse. I can solve any environmental problems you're having when I see you next.
 
 Otherwise css is scss here and is found in `./app/assets/` and the layout and other views are in `./app/views/`
-
-## Roadmap ##
-
-### Technical ###
-
-#### finishing local development ####
-* write daily email
-* write logic for daily admin note (signups, signups with completed services, other statistics)
-* write middleware for enqueueuing daily scrapes for each user
-
-#### 0.1 ####
-* signup from web with confirmation email
-* add instapaper scraper
-
-#### 0.2 ####
-* connect mailchimp
-* add feedback buttons from email
-* track events and opens
-
-#### 0.3 ####
-* add contexts to email
-* admin dashboard for viewing contexts vs email statistics
-
-#### for initial launch ####
-* set up foreman or some process runner
-* resque-scheduler or cron alternative
