@@ -32,33 +32,70 @@ $(document).ready(function(){
 					.attr('class', 'suggestion')
 					.data('suggestion-id', suggestion.id)
 					.data('suggestion-weight', suggestion.weight)
-					.html(suggestion.idea)
+					.html(suggestion.idea).append(
+						$("<div class='description'>")
+						.append(
+							$("<div>").attr('class','image')
+							.append(
+								$("<img>").attr('src', suggestion.image)
+							)
+						)
+						.append(
+							$("<div>")
+							.attr('class', 'text')
+							.html(suggestion.description + "<br /><span class='link'><a href='"+suggestion.link+"'>click to watch it now</a></span>")
+						)
+					)
 				)
 			});
+			$(".suggestion:first").children().show();
 		});
 
 		suggestions_box.show(500, 'linear');
 	};
 
-	$(".choice").toggle(function() {
+	$(".choice").bind('click', function() {
 		choice = $(this);
-		choice.siblings().removeClass('selected');
-		choice.addClass('selected');
-		choice.siblings().hide(500, 'linear');
 
-		if ( choice.data('choice-type') == 'time' ) {
-			time = $(this).data('choice');
+		if (choice.hasClass('selected')) {
+			choice.removeClass('selected');
+			choice.siblings().show(500, 'linear');
+
 		} else {
-			loc = $(this).data('choice');
-		};
+			choice.siblings().removeClass('selected');
+			choice.addClass('selected');
+			choice.siblings().hide(500, 'linear');
 
-		if(loc && time) {
-			getSuggestions();
+			if ( choice.data('choice-type') == 'time' ) {
+				time = choice.data('choice');
+
+			} else {
+				loc = choice.data('choice');
+
+			};
+
+			if(loc && time) {
+				getSuggestions();
+
+			}
+
 		}
+	});
 
-	}, function(){
-		$(this).removeClass('selected');
-		$(this).siblings().show(500, 'linear');
+	$("#suggestions").on('click', '.suggestion', function() {
+		suggestion = $(this);
+
+		if (suggestion.hasClass('selected')) {
+			suggestion.removeClass('selected');
+			suggestion.children().hide();
+
+		} else {
+			suggestion.siblings().removeClass('selected');
+			suggestion.siblings().children().hide();
+			suggestion.addClass('selected');
+			suggestion.children().show();
+
+		}
 	});
 
 });

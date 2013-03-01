@@ -1,6 +1,12 @@
 require 'net/http'
 require 'ostruct'
 
+class OpenStruct
+  def as_json(options = nil)
+    @table.as_json(options)
+  end
+end
+
 class Suggestion < Array
 
   attr_accessor :contexts
@@ -65,10 +71,10 @@ class Suggestion < Array
         description: content.description, 
         image: content.image, 
         provider: content.content_provider, 
-        type: content.content_type
+        type: content.content_type,
+        link: content.content_link
       })
     end
-
 
     suggestions
   end

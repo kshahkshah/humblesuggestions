@@ -1,0 +1,73 @@
+#user.section
+  - if current_user
+    .section-header#user-header
+      %h3 
+        Hello 
+        %span#username{contenteditable: 'true'}= current_user.display_name  
+    .section-box#signup-box
+      - if current_user.email.blank? 
+        = form_for(current_user, :url => registration_path(current_user), :html => { :method => :put, :id => 'edit_user' }) do |f|
+          = f.email_field :email, :id => 'edit_email', :placeholder => 'enter your email to receive timed reminders...' 
+          = f.password_field :password, :id => 'edit_password', :placeholder => 'enter a password' 
+          = f.submit 
+
+      - if current_user.connecting_to_services?
+        Processing content from 
+        = current_user.services_connecting_to.join(', ')
+
+      %span{:class => current_user.connected? ? 'small' : 'big'}
+        - if !current_user.instapaper_connected?
+          = link_to 'click to get suggestions from your articles saved on Instapaper', '/auth/instapaper'
+          %br
+
+        - if !current_user.netflix_connected? 
+          = link_to 'click to get suggestions from your movies saved on Netflix', '/auth/netflix'
+          %br
+  - elsif !current_user 
+    .section-header#signup-header
+      %h3 Welcome
+      %p
+        You&apos;ll receive gentle pushes to read and watch things you already have saved. 
+        We try to optimize the suggestions around you with your and the community's help.
+    .section-box#signup-box
+      = form_for(user = User.new, :url => registration_path(user)) do |f| 
+        = f.email_field :email, :id => 'new_email', :placeholder => 'enter your email to get started or...' 
+        = f.password_field :password, :id => 'new_password', :placeholder => 'enter a password' 
+        = f.submit 
+
+      - if !current_user.instapaper_connected?
+        = link_to 'click to get suggestions from your articles saved on Instapaper', '/auth/instapaper'
+        %br
+
+      - if !current_user.netflix_connected? 
+        = link_to 'click to get suggestions from your movies saved on Netflix', '/auth/netflix'
+        %br
+
+    .section-header#signin-header
+      %h3 Already Signed Up?
+
+    .section-box#signin-box
+      %p= link_to "Click here to sign in", new_user_session_path
+
+  #suggestions{:style => "display:none;"}
+
+  - if current_user && current_user.connected? 
+    #time.section
+      .choices-header#time-choices-header
+        %h2 How much time do you have?
+      .choices-box#time-choices-box
+        %ul
+          %li.choice{"data-choice-type" => "time", "data-choice" => "5"} a few minutes
+          %li.choice{"data-choice-type" => "time", "data-choice" => "15"} roughly 15 minutes
+          %li.choice{"data-choice-type" => "time", "data-choice" => "30"} around half an hour
+          %li.choice{"data-choice-type" => "time", "data-choice" => "60"} around an hour
+          %li.choice{"data-choice-type" => "time", "data-choice" => "180"} 2-3 hours
+
+    #location.section
+      .choices-header#location-choices-header
+        %h2 Where are you?
+      .choices-box#location-choices-box
+        %ul
+          %li.choice{"data-choice-type" => "location", "data-choice" => "home"} home
+          %li.choice{"data-choice-type" => "location", "data-choice" => "work"} work
+          %li.choice{"data-choice-type" => "location", "data-choice" => "commuting"} commuting

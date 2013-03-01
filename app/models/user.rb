@@ -44,6 +44,8 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :remember_me
   # attr_accessible :title, :body
 
+  LIST_OF_SERVICES = ['netflix', 'instapaper']
+
   after_create Proc.new {|u| UserMailer.welcome_email(u).deliver }
 
   has_many :content_suggestions
@@ -70,21 +72,16 @@ class User < ActiveRecord::Base
 
   end
 
-  def add_service_from_auth_hash(auth_hash)
-    self.email = auth_hash.info.email if self.email.blank?
-    self.send("#{auth_hash.provider}_user_id=", auth_hash.uid)
-    self.send("#{auth_hash.provider}_token=", auth_hash.credentials.token)
-    self.send("#{auth_hash.provider}_secret=", auth_hash.credentials.secret)
-    self.save
-    self.send("process_#{auth_hash.provider}_queue")
-  end
-
   def display_name
     name.blank? ? email.split("@").first : name.split(" ").first rescue "friend"
   end
 
   def connected?
     netflix_connected? or instapaper_connected?
+  end
+
+  def connecting_to_services?
+    LIST_OF_SERVICES.map{|service| self.send(service + '_connecting?')}.any?{|status| status == true}
   end
 
   def netflix_connecting?
@@ -99,6 +96,24 @@ class User < ActiveRecord::Base
   end
   def instapaper_connected?
     instapaper_status.eql?("processed")
+  end
+
+  def update_with_password(params={}) 
+    if params[:password].blank? 
+      params.delete(:password) 
+    end 
+    update_attributes(params) 
+    clean_up_passwords
+  end
+
+  private
+  def add_service_from_auth_hash(auth_hash)
+    self.email = auth_hash.info.email if self.email.blank?
+    self.send("#{auth_hash.provider}_user_id=", auth_hash.uid)
+    self.send("#{auth_hash.provider}_token=", auth_hash.credentials.token)
+    self.send("#{auth_hash.provider}_secret=", auth_hash.credentials.secret)
+    self.save
+    self.send("process_#{auth_hash.provider}_queue")
   end
 
   def process_netflix_queue(queue = false)
@@ -118,13 +133,5 @@ class User < ActiveRecord::Base
       InstapaperQueueProcessor.perform(id)
       self.instapaper_status = 'processed'
     end
-  end
-
-  def update_with_password(params={}) 
-    if params[:password].blank? 
-      params.delete(:password) 
-    end 
-    update_attributes(params) 
-    clean_up_passwords
   end
 end

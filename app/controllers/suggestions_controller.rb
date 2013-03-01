@@ -5,7 +5,8 @@ class SuggestionsController < ApplicationController
       time:       params[:time], 
       location:   params[:loc], 
       longitude:  params[:longitude], 
-      latitude:   params[:latitude]
+      latitude:   params[:latitude],
+      user:       current_user
     })
     render :json => @suggestions.to_json
   end
