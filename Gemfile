@@ -34,6 +34,10 @@ gem 'omniauth-netflix'
 gem 'instapaper'
 gem 'omniauth-instapaper'
 
+group :production do
+  gem 'unicorn'
+end
+
 # staging/production
 group :assets do
   gem 'therubyracer', '0.11.4'
