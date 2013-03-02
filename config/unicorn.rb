@@ -8,7 +8,7 @@ working_directory File.expand_path('../..', __FILE__)
 # Also listen on 3000 for direct conncetions from the local machine. This makes
 # it nice and easy to do the curl in config/deploy/backend/3-before_restart.rb.
 listen 3000
-listen "/run/nginx/nginx.sock", { backlog: 10 }
+listen "/var/run/nginx/nginx.sock", { backlog: 10 }
 
 # nuke workers after 30 seconds instead of 60 seconds (the default)
 timeout 30
