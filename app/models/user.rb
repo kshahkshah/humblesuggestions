@@ -120,7 +120,7 @@ class User < ActiveRecord::Base
 
   def process_netflix_queue(queue = false)
     if Rails.env.production? or queue
-      Resque.enqueue("NetflixQueueProcessor", self.id)
+      Resque.enqueue(NetflixQueueProcessor, self.id)
       self.netflix_status = 'processing'
     else
       NetflixQueueProcessor.perform(id)
@@ -129,7 +129,7 @@ class User < ActiveRecord::Base
   end
   def process_instapaper_queue(queue = false)
     if Rails.env.production? or queue
-      Resque.enqueue("InstapaperQueueProcessor", self.id)
+      Resque.enqueue(InstapaperQueueProcessor, self.id)
       self.instapaper_status = 'processing'
     else
       InstapaperQueueProcessor.perform(id)
