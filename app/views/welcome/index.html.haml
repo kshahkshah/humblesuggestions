@@ -35,14 +35,6 @@
         = f.password_field :password, :id => 'new_password', :placeholder => 'enter a password' 
         = f.submit 
 
-      - if !current_user.instapaper_connected?
-        = link_to 'click to get suggestions from your articles saved on Instapaper', '/auth/instapaper'
-        %br
-
-      - if !current_user.netflix_connected? 
-        = link_to 'click to get suggestions from your movies saved on Netflix', '/auth/netflix'
-        %br
-
     .section-header#signin-header
       %h3 Already Signed Up?
 
