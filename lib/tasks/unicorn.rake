@@ -5,7 +5,7 @@ end
 
 # standard operating procedure
 def grey(text)
-  colorize(text, ENV["TTY_GREY"] || "30m")
+  colorize(text, ENV["TTY_GREY"] || "37m")
 end
 
 # bad stuff
