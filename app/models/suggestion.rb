@@ -61,7 +61,7 @@ class Suggestion < Array
 
     # then the suggestions
     @user.content_suggestions.
-      select('*, SQRT(CAST(content_suggestions.position as double precision)*10) * CAST(content_suggestions.rating as double precision)^2 as weight').
+      select('*, SQRT(content_suggestions.position*10) * content_suggestions.rating^2 as weight').
       order('weight desc').
       limit(5).each do |content|
 

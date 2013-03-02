@@ -72,6 +72,16 @@ class User < ActiveRecord::Base
 
   end
 
+  # this should be a private method...
+  def add_service_from_auth_hash(auth_hash)
+    self.email = auth_hash.info.email if self.email.blank?
+    self.send("#{auth_hash.provider}_user_id=", auth_hash.uid)
+    self.send("#{auth_hash.provider}_token=", auth_hash.credentials.token)
+    self.send("#{auth_hash.provider}_secret=", auth_hash.credentials.secret)
+    self.save
+    self.send("process_#{auth_hash.provider}_queue")
+  end
+
   def display_name
     name.blank? ? email.split("@").first : name.split(" ").first rescue "friend"
   end
@@ -107,14 +117,6 @@ class User < ActiveRecord::Base
   end
 
   private
-  def add_service_from_auth_hash(auth_hash)
-    self.email = auth_hash.info.email if self.email.blank?
-    self.send("#{auth_hash.provider}_user_id=", auth_hash.uid)
-    self.send("#{auth_hash.provider}_token=", auth_hash.credentials.token)
-    self.send("#{auth_hash.provider}_secret=", auth_hash.credentials.secret)
-    self.save
-    self.send("process_#{auth_hash.provider}_queue")
-  end
 
   def process_netflix_queue(queue = false)
     if Rails.env.production? or queue
