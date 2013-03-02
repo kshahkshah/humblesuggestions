@@ -4,7 +4,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.2.11'
 
 # backend
-gem 'pg'
+gem 'mysql2'
 gem 'redis'
 gem 'resque'
 gem 'whenever'
