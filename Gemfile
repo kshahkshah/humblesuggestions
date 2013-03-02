@@ -14,8 +14,8 @@ gem 'jquery-rails'
 gem 'haml'
 
 # statistics
-gem 'statsample'
-gem 'gsl', :git => 'git://github.com/whistlerbrk/rb-gsl.git'
+# gem 'statsample'
+# gem 'gsl', :git => 'git://github.com/whistlerbrk/rb-gsl.git'
 
 # development
 gem 'annotate'
