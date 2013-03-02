@@ -36,6 +36,7 @@ gem 'omniauth-instapaper'
 
 group :production do
   gem 'unicorn'
+  gem 'exception_notification'
 end
 
 # staging/production
