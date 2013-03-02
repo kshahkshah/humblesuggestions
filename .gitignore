@@ -12,5 +12,6 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
-/tmp
+*.sock
+*.pid
 .DS_Store
