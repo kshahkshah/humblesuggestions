@@ -60,7 +60,7 @@ Humblesuggestions::Application.configure do
   config.action_mailer.smtp_settings = {
     address:   "smtp.mandrillapp.com",
     port:      587,
-    user_name: "whistlerbrk"
+    user_name: "whistlerbrk",
     password:  "Yo72YrFCBNH7cFhVUtvFDg"
   }
   config.action_mailer.delivery_method = :smtp
