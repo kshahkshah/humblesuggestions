@@ -5,6 +5,6 @@ every 1.day, at: '3:00 AM' do
   runner "Resque.enqueue(UpdateQueues)"
 end
 
-every 5.minutes do
-  runner "Resque.enqueue(DispatchEmails)"
+every 1.day, at: '1:00 PM' do
+  runner "Resque.enqueue(EmailDispatcher)"
 end
