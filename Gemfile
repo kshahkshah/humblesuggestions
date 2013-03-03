@@ -3,11 +3,14 @@ source 'http://rubygems.org'
 # core
 gem 'rails', '3.2.11'
 
-# backend
+# storage
 gem 'mysql2'
 gem 'redis'
-gem 'resque'
+
+# background jobs
 gem 'whenever'
+gem 'resque'
+gem 'resque-pool'
 
 # front end
 gem 'jquery-rails'
@@ -37,6 +40,7 @@ gem 'omniauth-instapaper'
 group :production do
   gem 'unicorn'
   gem 'exception_notification'
+  gem 'resque-failed-job-mailer'
 end
 
 # staging/production

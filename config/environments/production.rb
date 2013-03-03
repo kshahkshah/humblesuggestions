@@ -5,6 +5,14 @@ Humblesuggestions::Application.configure do
    :sender_address => %{"notifier" <no-reply@kunalashah.com>},
    :exception_recipients => %w{me@kunalashah.com}
 
+  require 'resque_failed_job_mailer'
+
+  Resque::Failure::Notifier.configure do |config|
+    config.from = 'no-reply@kunalashah.com' # from address
+    config.to = 'me@kunalashah.com' # to address
+    config.include_payload = true # enabled by default
+  end
+
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
