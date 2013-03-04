@@ -10,7 +10,7 @@ class UserMailer < ActionMailer::Base
     @user = user
     @suggestions = Suggestion.get({user: user})
     @suggestion = @suggestions.first
-    @title = "Here's idea for tonight..."
+    @title = "Here's an idea for tonight..."
 
     mail(to: user.email, subject: @title)
   end
