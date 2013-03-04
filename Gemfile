@@ -20,12 +20,6 @@ gem 'haml'
 # gem 'statsample'
 # gem 'gsl', :git => 'git://github.com/whistlerbrk/rb-gsl.git'
 
-# development
-gem 'annotate'
-gem 'debugger'
-gem 'pry'
-gem 'mailcatcher'
-
 # authentication
 gem 'devise'
 gem 'omniauth'
@@ -41,6 +35,13 @@ group :production do
   gem 'unicorn'
   gem 'exception_notification'
   gem 'resque-failed-job-mailer'
+end
+
+group :development do
+  gem 'annotate'
+  gem 'debugger'
+  gem 'pry'
+  gem 'mailcatcher'
 end
 
 # staging/production

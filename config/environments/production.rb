@@ -2,8 +2,8 @@ Humblesuggestions::Application.configure do
 
   config.middleware.use ExceptionNotifier,
     :email_prefix => "[Ricochet Error] ",
-   :sender_address => %{"notifier" <no-reply@kunalashah.com>},
-   :exception_recipients => %w{me@kunalashah.com}
+    :sender_address => %{"notifier" <no-reply@kunalashah.com>},
+    :exception_recipients => %w{me@kunalashah.com}
 
   require 'resque_failed_job_mailer'
 
