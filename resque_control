@@ -1,0 +1,41 @@
+#!/usr/bin/env ruby
+
+$: << File.expand_path(File.dirname(__FILE__))
+
+require 'rubygems'
+require 'resque'
+require 'daemons'
+require 'active_record'
+require 'mysql2'
+require 'devise'
+require 'devise/orm/active_record'
+require 'yaml'
+
+options = {
+  :app_name   => 'humblequeue',
+  :dir_mode   => :normal,
+  :dir        => File.expand_path(File.dirname(__FILE__)),
+  :multiple   => true,
+  :mode       => :load,
+  :backtrace  => true,
+  :monitor    => true,
+  :log_output => true,
+  :log_dir    => File.expand_path(File.dirname(__FILE__)) + '/log'
+}
+
+Daemons.run_proc('humblequeue', options) do
+  require 'app/models/user'
+  require 'app/models/content_suggestion'
+  require 'app/models/suggestion'
+  require 'app/workers/email_dispatcher'
+  require 'app/workers/netflix_queue_processor'
+  require 'app/workers/update_queues'
+
+  config = File.open("/Users/kunal/Projects/humblesuggestions/config/database.yml")
+  ActiveRecord::Base.establish_connection(YAML::load(config)[ENV["RACK_ENV"]||'development'])
+
+  worker = Resque::Worker.new(ENV['QUEUE'] ||= '*')
+  worker.verbose = true
+  worker.log "Starting resque worker pointed at all queues"
+  worker.work(5)
+end
