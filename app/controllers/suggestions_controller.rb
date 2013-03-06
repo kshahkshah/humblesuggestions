@@ -12,7 +12,14 @@ class SuggestionsController < ApplicationController
   end
 
   def index
-    @content = current_user.content_suggestions
+    @suggestions = Suggestion.get({
+      time:       params[:time], 
+      location:   params[:loc], 
+      longitude:  params[:longitude], 
+      latitude:   params[:latitude],
+      user:       current_user,
+      limit:      100
+    })
   end
 
 end

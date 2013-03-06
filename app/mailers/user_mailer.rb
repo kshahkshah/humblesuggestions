@@ -8,10 +8,17 @@ class UserMailer < ActionMailer::Base
 
   def daily_suggestion(user)
     @user = user
-    @suggestions = Suggestion.get({user: user})
+    @suggestions = Suggestion.get({user: @user})
     @suggestion = @suggestions.first
     @title = "Here's an idea for tonight..."
 
-    mail(to: user.email, subject: @title)
+    @track = SuggestionTrack.new({
+      user_id: @user.id, 
+      content_item_id: @suggestion.item_id,
+      via: 'email',
+      on:  Time.now
+    }).save
+
+    mail(to: @user.email, subject: @title)
   end
 end

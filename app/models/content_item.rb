@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: content_suggestions
+# Table name: content_items
 #
 #  id               :integer          not null, primary key
 #  user_id          :integer
@@ -15,11 +15,10 @@
 #  time_added       :string(255)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  suggested_on     :datetime
-#  suggested_via    :string(255)
 #
 
-class ContentSuggestion < ActiveRecord::Base
+class ContentItem < ActiveRecord::Base
+  has_many :suggestion_tracks
   belongs_to :user
 
   attr_accessible :user_id, :content_id, :content_provider, :content_type, :description, :image, :position, :rating, :time_added, :title

@@ -17,6 +17,7 @@ class Suggestion < Array
     # collect the inputs
     @user      = options[:user]
     @time      = options[:time]      || 2.hours
+    @limit     = options[:limit]     || 5
     @location  = options[:location]  || (@user.last_location if @user)
     @longitude = options[:longitude] || (@user.last_longitude if @user)
     @latitude  = options[:latitude]  || (@user.last_latitude if @user)
@@ -60,19 +61,20 @@ class Suggestion < Array
     }
 
     # then the suggestions
-    @user.content_suggestions.
-      select('*, SQRT(content_suggestions.position*10) * content_suggestions.rating^2 as weight').
-      order('weight desc').
-      limit(5).each do |content|
+    @user.content_items.joins('LEFT OUTER JOIN suggestion_tracks ON suggestion_tracks.content_item_id = content_items.id AND suggestion_tracks.user_id = content_items.user_id').
+      select('content_items.*, SQRT(content_items.position*10) * content_items.rating^2 as weight').
+      where('suggestion_tracks.id is null or suggestion_tracks.on < (?)', 30.days.ago).
+      order('weight desc').limit(@limit).each do |item|
 
       suggestions << OpenStruct.new({
-        idea: content.title, 
-        weight: content.weight, 
-        description: content.description, 
-        image: content.image, 
-        provider: content.content_provider, 
-        type: content.content_type,
-        link: content.content_link
+        idea: item.title, 
+        weight: item.weight, 
+        description: item.description, 
+        image: item.image, 
+        provider: item.content_provider, 
+        type: item.content_type,
+        link: item.content_link,
+        item_id: item.id
       })
     end
 

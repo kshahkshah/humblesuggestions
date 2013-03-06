@@ -25,7 +25,7 @@ options = {
 
 Daemons.run_proc('humblequeue', options) do
   require 'app/models/user'
-  require 'app/models/content_suggestion'
+  require 'app/models/content_item'
   require 'app/models/suggestion'
   require 'app/workers/email_dispatcher'
   require 'app/workers/netflix_queue_processor'

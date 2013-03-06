@@ -4,22 +4,18 @@
     <script>
       $(document).ready(function() 
         { 
-          $("#contentsuggestions").tablesorter(); 
+          $("#suggestions").tablesorter(); 
         } 
       ); 
     </script>
 
 
-%table{:class => "tablesorter", :id => "contentsuggestions"}
+%table{:class => "tablesorter", :id => "suggestions"}
   %thead
     %th Title
-    %th Rating
-    %th Position
     %th Weighting
   %tbody
-    - @content.each do |content|
+    - @suggestions.each do |suggestion|
       %tr
-        %td= content.title
-        %td= content.rating
-        %td= content.position
-        %td= Math.sqrt(content.position.to_f*10) * content.rating.to_f*content.rating.to_f
+        %td= suggestion.title
+        %td= suggestion.weight

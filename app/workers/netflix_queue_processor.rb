@@ -13,7 +13,7 @@ class NetflixQueueProcessor
 
     queue = netflix_user.instant_disc_queue(:include => ['synopsis'])
 
-    old_suggestions = @user.content_suggestions.where(content_provider: 'netflix').pluck(:content_id)
+    old_suggestions = @user.content_items.where(content_provider: 'netflix').pluck(:content_id)
 
     suggestions = []
     all_ratings = []
@@ -25,7 +25,7 @@ class NetflixQueueProcessor
       # obviously this is dirty...
       map = disc.send(:instance_variable_get, :@map)
 
-      if suggestion = ContentSuggestion.find_by_content_id(disc.id)
+      if suggestion = ContentItem.find_by_content_id(disc.id)
         suggestion.title = self.clean(disc.title.to_s)
         suggestion.description = self.clean(map["link"].select{|l|l["synopsis"]}.first["synopsis"].to_s)
         suggestion.image = map["box_art"]["large"]
@@ -37,7 +37,7 @@ class NetflixQueueProcessor
         end
       else
         puts "new content, creating"
-        ContentSuggestion.create({
+        ContentItem.create({
           user_id:          @user.id,
           content_type:     'video',
           content_provider: 'netflix',
@@ -59,7 +59,7 @@ class NetflixQueueProcessor
     # any suggestions no longer on the queue have been watched or removed.
     old_suggestions.each do |old_suggestion_content_id|
       puts "old content, marking"
-      suggested = ContentSuggestion.where(user_id: @user.id).where(content_id: old_suggestion_content_id).first
+      suggested = ContentItem.where(user_id: @user.id).where(content_id: old_suggestion_content_id).first
       suggested.status = 'removed'
       suggested.save
     end

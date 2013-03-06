@@ -1,0 +1,53 @@
+# == Schema Information
+#
+# Table name: content_items
+#
+#  id               :integer          not null, primary key
+#  user_id          :integer
+#  content_type     :string(255)
+#  content_provider :string(255)
+#  content_id       :string(255)
+#  title            :string(255)
+#  description      :text
+#  image            :string(255)
+#  rating           :string(255)
+#  position         :string(255)
+#  time_added       :string(255)
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+video_unwatched_one:
+  user_id:
+  content_type:
+  content_provider:
+  content_id:
+  title:
+  description:
+  image:
+  rating:
+  position:        
+
+video_suggested_one:
+  user_id:
+  content_type:
+  content_provider:
+  content_id:
+  title:
+  description:
+  image:
+  rating:
+  position:        
+
+video_watched_one:
+  user_id:
+  content_type:
+  content_provider:
+  content_id:
+  title:
+  description:
+  image:
+  rating:
+  position:

@@ -11,9 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130225073522) do
+ActiveRecord::Schema.define(:version => 20130306070117) do
 
-  create_table "content_suggestions", :force => true do |t|
+  create_table "content_items", :force => true do |t|
     t.integer  "user_id"
     t.string   "content_type"
     t.string   "content_provider"
@@ -26,8 +26,6 @@ ActiveRecord::Schema.define(:version => 20130225073522) do
     t.string   "time_added"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
-    t.datetime "suggested_on"
-    t.string   "suggested_via"
   end
 
   create_table "context_options", :force => true do |t|
@@ -68,6 +66,18 @@ ActiveRecord::Schema.define(:version => 20130225073522) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "suggestion_tracks", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "content_item_id"
+    t.datetime "on"
+    t.string   "via"
+    t.string   "status"
+    t.boolean  "opened"
+    t.datetime "opened_on"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email"

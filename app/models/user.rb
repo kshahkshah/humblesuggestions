@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
 
   after_create Proc.new {|u| UserMailer.welcome_email(u).deliver }
 
-  has_many :content_suggestions
+  has_many :content_items
 
   def self.find_or_create_from_auth_hash(auth_hash)
     # first check if we have that user via that provider...
