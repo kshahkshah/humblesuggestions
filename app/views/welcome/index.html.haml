@@ -5,8 +5,10 @@
         Hello 
         %span#username{contenteditable: 'true'}= current_user.display_name  
     .section-box#signup-box
+      = link_to "logout", destroy_user_session_path, :method => :delete
       - if current_user.email.blank? 
         = form_for(current_user, :url => registration_path(current_user), :html => { :method => :put, :id => 'edit_user' }) do |f|
+          = devise_error_messages!
           = f.email_field :email, :id => 'edit_email', :placeholder => 'enter your email to receive timed reminders...' 
           = f.password_field :password, :id => 'edit_password', :placeholder => 'enter a password' 
           = f.submit 
@@ -27,12 +29,13 @@
     .section-header#signup-header
       %h3 Welcome
       %p
-        You&apos;ll receive gentle pushes to read and watch things you already have saved. 
-        We try to optimize the suggestions around you with your and the community's help.
+        Read, watch, and, listen on your own time.
     .section-box#signup-box
       = form_for(user = User.new, :url => registration_path(user)) do |f| 
+        = devise_error_messages!
         = f.email_field :email, :id => 'new_email', :placeholder => 'enter your email to get started or...' 
         = f.password_field :password, :id => 'new_password', :placeholder => 'enter a password' 
+        = f.text_field :signup_code, :id => 'new_signup_code', :placeholder => 'sign up code' 
         = f.submit 
 
     .section-header#signin-header

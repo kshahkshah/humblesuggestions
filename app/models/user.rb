@@ -39,9 +39,11 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :email, :case_sensitive => false, :allow_blank => true, :if => :email_changed?
   validates_format_of :email, :with => Devise.email_regexp, :allow_blank => true, :if => :email_changed?
+  validate :check_signup_code
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :remember_me
+  attr_accessor :signup_code
+  attr_accessible :name, :email, :password, :remember_me, :signup_code
   # attr_accessible :title, :body
 
   LIST_OF_SERVICES = ['netflix', 'instapaper']
@@ -117,6 +119,18 @@ class User < ActiveRecord::Base
   end
 
   private
+  def valid_signup_codes
+    ['humbly']
+  end
+
+  def check_signup_code
+    if valid_signup_codes.include?(self.signup_code)
+      return true
+    else
+      errors.add(:base, 'invalid signup code')
+      return false
+    end
+  end
 
   def process_netflix_queue(queue = false)
     if Rails.env.production? or queue

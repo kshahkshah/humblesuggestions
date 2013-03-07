@@ -6,7 +6,7 @@ Humblesuggestions::Application.routes.draw do
   resources :ideas
   resources :suggestions
 
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "registrations"}
 
   root :to => 'welcome#index'
   match '/home' => 'welcome#home'

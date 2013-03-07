@@ -1,4 +1,4 @@
-class Devise::RegistrationsController < DeviseController
+  class RegistrationsController < Devise::RegistrationsController
   # ripped entirely, but with a change of redirect
   def update
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
@@ -15,6 +15,16 @@ class Devise::RegistrationsController < DeviseController
     else
       clean_up_passwords resource
       redirect_to '/'
+    end
+  end
+
+  def create
+    @user = User.new(params[:user])
+
+    if @user.save
+      redirect_to '/'
+    else
+      render 'welcome/index'
     end
   end
 end
