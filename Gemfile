@@ -11,6 +11,7 @@ gem 'redis'
 gem 'whenever'
 gem 'resque'
 gem 'resque-pool'
+gem 'mandrill-rails'
 
 # front end
 gem 'jquery-rails'
