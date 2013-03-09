@@ -4,7 +4,4 @@ class WelcomeController < ApplicationController
 
   def home
   end
-
-  def roadmap
-  end
 end

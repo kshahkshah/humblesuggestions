@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   after_filter :update_user_if_user
   protect_from_forgery
+  helper_method :resource, :resource_name, :devise_mapping
 
   def update_user_if_user
     if current_user
