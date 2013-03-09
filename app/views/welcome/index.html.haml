@@ -32,10 +32,18 @@
         Read, watch, and, listen on your own time.
     .section-box#signup-box
       = form_for(resource, :url => registration_path(resource)) do |f| 
-        = devise_error_messages!
-        = f.email_field :email, :id => 'new_email', :placeholder => 'enter your email to get started or...' 
-        = f.password_field :password, :id => 'new_password', :placeholder => 'enter a password' 
-        = f.text_field :signup_code, :id => 'new_signup_code', :placeholder => 'sign up code' 
+        - if resource.errors.messages.has_key?(:email)
+          %p.error
+            There was a problem with your email address. Please make sure it entered properly and that you have not already registered.
+        - if resource.errors.messages.has_key?(:signup_code)
+          %p.error
+            You need to use a valid signup code until registration is opened for all. <a href='mailto:me@kunalashah.com'>Ask me for one</a>.
+        - if resource.errors.messages.has_key?(:password)
+          %p.error
+            Please enter a valid password and try again.
+        = f.email_field :email, :id => 'new_email', :placeholder => 'enter your email to get started or...', :class => (resource.errors.messages.has_key?(:email) ? 'error_field' : '')
+        = f.password_field :password, :id => 'new_password', :placeholder => 'enter a password', :class => (resource.errors.messages.has_key?(:password) ? 'error_field' : '')
+        = f.text_field :signup_code, :id => 'new_signup_code', :placeholder => 'sign up code', :class => (resource.errors.messages.has_key?(:email) ? 'error_field' : '')
         = f.submit :value => "Join"
 
     .section-header#signin-header

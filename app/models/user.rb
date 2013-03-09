@@ -39,6 +39,7 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :email, :case_sensitive => false, :allow_blank => true, :if => :email_changed?
   validates_format_of :email, :with => Devise.email_regexp, :allow_blank => true, :if => :email_changed?
+  validates_presence_of :password
   validate :check_signup_code
 
   # Setup accessible (or protected) attributes for your model
@@ -127,7 +128,7 @@ class User < ActiveRecord::Base
     if valid_signup_codes.include?(self.signup_code)
       return true
     else
-      errors.add(:base, 'invalid signup code')
+      errors.add(:signup_code, 'invalid signup code')
       return false
     end
   end
