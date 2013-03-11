@@ -43,7 +43,7 @@
             Please enter a valid password and try again.
         = f.email_field :email, :id => 'new_email', :placeholder => 'enter your email to get started or...', :class => (resource.errors.messages.has_key?(:email) ? 'error_field' : '')
         = f.password_field :password, :id => 'new_password', :placeholder => 'enter a password', :class => (resource.errors.messages.has_key?(:password) ? 'error_field' : '')
-        = f.text_field :signup_code, :id => 'new_signup_code', :placeholder => 'sign up code', :class => (resource.errors.messages.has_key?(:email) ? 'error_field' : '')
+        = f.text_field :signup_code, :id => 'new_signup_code', :placeholder => 'sign up code', :class => (resource.errors.messages.has_key?(:signup_code) ? 'error_field' : '')
         = f.submit :value => "Join"
 
     .section-header#signin-header
