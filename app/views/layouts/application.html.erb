@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>Humble Suggestions</title>
-    <%= stylesheet_link_tag    "application", :media => "all" %>
-    <link href='http://fonts.googleapis.com/css?family=Muli' rel='stylesheet' type='text/css'>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <link href='http://fonts.googleapis.com/css?family=Muli:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
     <%= javascript_include_tag "application" %>
     <% if content_for(:head) %>
     <%= yield :head %>
@@ -11,11 +11,25 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <div id="container">
-      <div id="title">Humble Suggestions</div>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-      <%= yield %>
+    <div class="grid-container">
+      <div id="header">
+        <a href="/" class="grid-60 mobile-grid-100"><div id="title">Humble Suggestions</div></a>
+        <div id="controls" class="grid-40 mobile-grid-100">
+          <div id="account">
+            <% if current_user %>
+              <a class="btn" href="/settings"><i class="icon-cog icon-small"></i> Settings</a>
+            <% elsif !request.path.eql?('/') %>
+              <a class="btn" href="<%= new_user_session_path %>"><i class="icon-home icon-small"></i> Sign In</a>
+              <a class="btn" href="/"><i class="icon-user icon-small"></i> Join Now!</a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <%- if notice %><div class="notice grid-100"><%= notice %></div><% end %>
+      <%- if alert %><div class="alert grid-100"><%= alert %></div><% end %>
+      <div id='content'>
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>

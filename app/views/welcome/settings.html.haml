@@ -1,0 +1,48 @@
+.grid-100.mobile-grid-100.section#connect
+  %h2 Connect Services
+  %p.teaser
+    %span{:class => 'deep'} Connect the services you&apos;re using below. We do not share your information with anyone in anyway.
+
+.section#service-option-grid
+  .grid-25.mobile-grid-50.service-options
+    - if !current_user.instapaper_connected?
+      = link_to 'Instapaper', '/auth/instapaper'
+    - else
+      Instapaper
+  .grid-25.mobile-grid-50.service-options
+    - if !current_user.netflix_connected? 
+      = link_to 'Netflix', '/auth/netflix'
+    - else
+      Netflix
+
+  .grid-100.mobile-grid-100
+    If you want something added that you don't see below, please <a href="mailto:me@kunalashah.com"> contact me</a>.
+
+.section.grid-100.mobile-grid-100
+  %h2 Account
+
+  = form_for(current_user, :as => :user, :url => registration_path(current_user), :html => { :method => :put }) do |f|
+    = devise_error_messages!
+
+    %fieldset
+      = f.label :email
+      %br
+      = f.email_field :email
+    %fieldset
+      = f.label :password
+      %br
+      %i (leave blank if you don't want to change it)
+      %br
+      = f.password_field :password, :autocomplete => "off"
+    %fieldset
+      = f.label :password_confirmation
+      %br
+      = f.password_field :password_confirmation
+    %fieldset
+      = f.label :current_password
+      %br
+      %i (we need your current password to confirm your changes)
+      %br
+      = f.password_field :current_password
+    %fieldset
+      = f.submit "Update"

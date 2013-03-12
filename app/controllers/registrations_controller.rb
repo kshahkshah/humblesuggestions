@@ -22,7 +22,7 @@
     @user = User.new(params[:user])
 
     if @user.save
-      redirect_to '/'
+      redirect_to 'welcome/services'
     else
       render 'welcome/index'
     end

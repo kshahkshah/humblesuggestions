@@ -1,13 +1,13 @@
 body {
-  margin-top:30px;
   padding:0;
   color:#333;
   font-size:15px;
   font-family: 'Muli', sans-serif;
+  font-weight:300;
   background:#FFF;
 }
 
-div,ul,li,p,dd,dt,dl,h1,h2,h3 {
+ul,li,dd,dt,dl,h1,h2,h3 {
   font-size:1em;
   font-style:normal;
   font-weight:normal;
@@ -20,26 +20,28 @@ a, a:visited{text-decoration:none; color:#1896d3;}
 a:hover{text-decoration:underline; color:#1896d3;}
 
 #container {
-  width:550px;
-	margin:0px auto;
-	min-height: 100%;
-	position: relative;
+	// margin:0px auto;
+	// min-height: 100%;
+	// position: relative;
+}
+
+.deep {
+  font-weight:400;
+}
+
+#header{
+  margin-bottom:0.75em;
 }
 
 #title {
-  text-shadow:1px 1px 1px #999;
-  font-size:40px;
+  font-size:3em;
+  line-height:1.5em;
 }
 
-#content {
-  line-height:22px;
-	width:600px;
-	padding:0 40px 0 0;
-	float:left;
-}
-
-#header {
-  padding:40px 0 0 0;
+#account {
+  margin-top:15px;
+  float:right;
+  font-weight:400;
 }
 
 h1{
@@ -55,6 +57,7 @@ h1 a, h1 a:visited{
 h2 {
   color:#333;
   font-size:32px;
+  font-weight:300;
   margin:0;
 }
 
@@ -63,6 +66,7 @@ li i{padding-right:15px;}
 h3,dt{
   color:#666;
   font-size:24px;
+  font-weight:300;
   margin:0;
   padding:0;
 }
@@ -81,10 +85,11 @@ span {
 }
 
 input[type="text"], input[type="email"], input[type="password"] {
-	font-size:18px;
+	font-size:17px;
+  font-weight:300;
 	padding:10px;
 	margin:5px 0;
-	width:500px;
+	// width:500px;
 	background-color: hsl(0, 0, 98);
 	border:1px solid hsl(0, 0, 80);
 	border-radius: 3px;
@@ -99,7 +104,7 @@ input[type="submit"] {
 	font-size:24px;
 	padding:10px;
 	margin:5px 0;
-	width:521px;
+	// width:521px;
 	background-color: #EEE;
 	border:1px solid #CCC;
 	border-radius: 4px;
@@ -112,13 +117,29 @@ p {
   padding:5px 0px;
 }
 
+.teaser {
+  padding:10px 0px;
+}
+
+form {
+  margin-top:10px;
+}
+fieldset {
+  border:0;
+  padding:0 0 10px 0;
+  margin:0;
+}
+fieldset i{
+  font-size:12px;
+}
+
 .form-field {
-	width:500px;
 	clear:both;
 }
 
 .section {
 	clear:both;
+  margin-bottom:20px;
 }
 
 .small {
@@ -126,8 +147,8 @@ p {
 }
 
 textarea {
-	width:500px;
-	height:300px;
+	// width:500px;
+	// height:300px;
 	font-size:14px;
 	padding:3px;
 	border: 1px solid #CCC;
@@ -156,7 +177,7 @@ textarea {
   float:left;
   padding:11px;
   margin:5px;
-  width:230px;
+  // width:230px;
   text-align: center;
 }
 #signup-header p {
@@ -166,7 +187,7 @@ textarea {
 .choice {
 	padding:10px;
 	margin:5px 0;
-	width:500px;
+	// width:500px;
 	background-color: #EEE;
 	border:1px solid #CCC;
 	border-radius: 2px;
@@ -181,7 +202,7 @@ textarea {
 .suggestion {
   padding:10px;
   margin:10px 0 10px 0;
-  width:500px;
+  // width:500px;
   background-color: #EEE;
   border:1px solid #CCC;
   border-radius: 2px;

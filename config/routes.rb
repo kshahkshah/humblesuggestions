@@ -10,7 +10,7 @@ Humblesuggestions::Application.routes.draw do
 
   root :to => 'welcome#index'
   match '/home' => 'welcome#home'
-  match '/roadmap' => 'welcome#roadmap'
+  match '/settings' => 'welcome#settings'
   match '/auth/:provider/callback', to: 'sessions#create'
 
 end

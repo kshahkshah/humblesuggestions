@@ -12,6 +12,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def after_sign_in_path_for(resource)
+    request.env['omniauth.origin'] || stored_location_for(resource) || connect_or_home(resource)
+  end
+
+  def connect_or_home(resource)
+    resource.connected? ? '/home' : '/services'
+  end
+
   def resource_name
     :user
   end

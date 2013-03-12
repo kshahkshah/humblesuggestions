@@ -1,76 +1,36 @@
-#user.section
-  - if current_user
-    .section-header#user-header
-      %h3 
-        Hello 
-        %span#username{contenteditable: 'true'}= current_user.display_name  
-    .section-box#signup-box
-      = link_to "logout", destroy_user_session_path, :method => :delete
-      - if current_user.email.blank? 
-        = form_for(current_user, :url => registration_path(current_user), :html => { :method => :put, :id => 'edit_user' }) do |f|
-          = devise_error_messages!
-          = f.email_field :email, :id => 'edit_email', :placeholder => 'enter your email to receive timed reminders...' 
-          = f.password_field :password, :id => 'edit_password', :placeholder => 'enter a password' 
-          = f.submit 
+.grid-50.mobile-grid-100#intro
+  %h2 Welcome
+  %p.teaser
+    %span{:class => 'deep'} Too much content not enough time?
+    %br
+    %br
+    Read, watch, and, listen on your own time.
+    %br
+    We connect your lists, todos, and subscriptions from services you already use across the web and help you make the most of your time with a daily suggestion email.
 
-      - if current_user.connecting_to_services?
-        Processing content from 
-        = current_user.services_connecting_to.join(', ')
+.grid-50.mobile-grid-100#signup
+  %h2 Join us
 
-      %span{:class => current_user.connected? ? 'small' : 'big'}
-        - if !current_user.instapaper_connected?
-          = link_to 'click to get suggestions from your articles saved on Instapaper', '/auth/instapaper'
-          %br
+  = form_for(resource, :url => registration_path(resource)) do |f| 
+    - if resource.errors.messages.has_key?(:email)
+      %p.error
+        There was a problem with your email address. Please make sure it entered properly and that you have not already registered.
+    - if resource.errors.messages.has_key?(:signup_code)
+      %p.error
+        You need to use a valid signup code until registration is opened for all. <a href='mailto:me@kunalashah.com'>Ask me for one</a>.
+    - if resource.errors.messages.has_key?(:password)
+      %p.error
+        Please enter a valid password and try again.
+    = f.email_field :email, :id => 'new_email', :placeholder => 'enter your email to get started or...', :class => (resource.errors.messages.has_key?(:email) ? 'error_field' : '')
+    = f.password_field :password, :id => 'new_password', :placeholder => 'enter a password', :class => (resource.errors.messages.has_key?(:password) ? 'error_field' : '')
+    = f.text_field :signup_code, :id => 'new_signup_code', :placeholder => 'sign up code', :class => (resource.errors.messages.has_key?(:signup_code) ? 'error_field' : '')
+    = f.submit :value => "Join", :class => 'btn btn-primary btn-large'
 
-        - if !current_user.netflix_connected? 
-          = link_to 'click to get suggestions from your movies saved on Netflix', '/auth/netflix'
-          %br
-  - elsif !current_user 
-    .section-header#signup-header
-      %h3 Welcome
-      %p
-        Read, watch, and, listen on your own time.
-    .section-box#signup-box
-      = form_for(resource, :url => registration_path(resource)) do |f| 
-        - if resource.errors.messages.has_key?(:email)
-          %p.error
-            There was a problem with your email address. Please make sure it entered properly and that you have not already registered.
-        - if resource.errors.messages.has_key?(:signup_code)
-          %p.error
-            You need to use a valid signup code until registration is opened for all. <a href='mailto:me@kunalashah.com'>Ask me for one</a>.
-        - if resource.errors.messages.has_key?(:password)
-          %p.error
-            Please enter a valid password and try again.
-        = f.email_field :email, :id => 'new_email', :placeholder => 'enter your email to get started or...', :class => (resource.errors.messages.has_key?(:email) ? 'error_field' : '')
-        = f.password_field :password, :id => 'new_password', :placeholder => 'enter a password', :class => (resource.errors.messages.has_key?(:password) ? 'error_field' : '')
-        = f.text_field :signup_code, :id => 'new_signup_code', :placeholder => 'sign up code', :class => (resource.errors.messages.has_key?(:signup_code) ? 'error_field' : '')
-        = f.submit :value => "Join"
-
-    .section-header#signin-header
-      %h3 Already Signed Up?
-
-    .section-box#signin-box
-      %p= link_to "Click here to sign in", new_user_session_path
-
-  #suggestions{:style => "display:none;"}
-
-  - if current_user && current_user.connected? 
-    #time.section
-      .choices-header#time-choices-header
-        %h2 How much time do you have?
-      .choices-box#time-choices-box
-        %ul
-          %li.choice{"data-choice-type" => "time", "data-choice" => "5"} a few minutes
-          %li.choice{"data-choice-type" => "time", "data-choice" => "15"} roughly 15 minutes
-          %li.choice{"data-choice-type" => "time", "data-choice" => "30"} around half an hour
-          %li.choice{"data-choice-type" => "time", "data-choice" => "60"} around an hour
-          %li.choice{"data-choice-type" => "time", "data-choice" => "180"} 2-3 hours
-
-    #location.section
-      .choices-header#location-choices-header
-        %h2 Where are you?
-      .choices-box#location-choices-box
-        %ul
-          %li.choice{"data-choice-type" => "location", "data-choice" => "home"} home
-          %li.choice{"data-choice-type" => "location", "data-choice" => "work"} work
-          %li.choice{"data-choice-type" => "location", "data-choice" => "commuting"} commuting
+  %br
+  %h3 Already humbled? Sign in
+  = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+    = f.email_field :email, :id => 'email', :placeholder => 'enter your email'
+    = f.password_field :password, :id => 'password', :placeholder => 'enter your password'
+    = f.submit :value => "Sign In", :class => 'btn btn-large'
+    %br
+    = link_to "Forgot your password?", new_password_path(resource_name)
