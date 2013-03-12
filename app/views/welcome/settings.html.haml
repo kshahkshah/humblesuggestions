@@ -3,20 +3,26 @@
   %p.teaser
     %span{:class => 'deep'} Connect the services you&apos;re using below. We do not share your information with anyone in anyway.
 
-.section#service-option-grid
-  .grid-25.mobile-grid-50.service-options
+.section#service-options.grid-100.mobile-grid-100
+  .service-option
     - if !current_user.instapaper_connected?
-      = link_to 'Instapaper', '/auth/instapaper'
+      %h3= link_to 'Instapaper', '/auth/instapaper'
+      (click to connect)
     - else
-      Instapaper
-  .grid-25.mobile-grid-50.service-options
+      %h3 Instapaper
+      (currently connected)
+  .service-option
     - if !current_user.netflix_connected? 
-      = link_to 'Netflix', '/auth/netflix'
+      %h3= link_to 'Netflix', '/auth/netflix'
+      (click to connect)
     - else
-      Netflix
+      %h3 Netflix
+      (currently connected)
 
-  .grid-100.mobile-grid-100
-    If you want something added that you don't see below, please <a href="mailto:me@kunalashah.com"> contact me</a>.
+.section.grid-100.mobile-grid-100
+  Not seeing a service you were looking for?
+  %br
+  <a href="mailto:me@kunalashah.com">Contact me</a> and I may add it.
 
 - unless params[:initial]
   .section.grid-100.mobile-grid-100

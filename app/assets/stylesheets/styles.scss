@@ -235,3 +235,20 @@ textarea {
     color: #333;
   }
 }
+
+#service-options {
+  .service-option {
+    background-color: hsl(0, 0, 96);
+    padding:20px;
+    float:left;
+    margin-right:20px;
+    width:20%;
+    height:3em;
+    text-align:center;
+
+    h3 {
+      margin:0;
+      padding:0;
+    }
+  }
+}
