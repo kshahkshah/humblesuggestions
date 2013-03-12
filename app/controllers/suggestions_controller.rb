@@ -6,9 +6,10 @@ class SuggestionsController < ApplicationController
       location:   params[:loc], 
       longitude:  params[:longitude], 
       latitude:   params[:latitude],
-      user:       current_user
+      user:       current_user,
+      limit:      5
     })
-    render :json => @suggestions.to_json
+    render :partial => 'suggestions/list'
   end
 
   def index

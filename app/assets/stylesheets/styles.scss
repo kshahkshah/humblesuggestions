@@ -9,14 +9,18 @@ body {
 
 ul,li,dd,dt,dl,h1,h2,h3 {
   font-size:1em;
-  font-style:normal;
-  font-weight:normal;
   list-style-type:none;
   background-repeat:no-repeat;
   background-position:0 0;
+  margin:0;
 }
 
-a, a:visited{text-decoration:none; color:#1896d3;}
+h1, h2, h3, h4, h5, h6 {
+  font-style:normal;
+  font-weight:normal;
+}
+
+a, a:visited {text-decoration:none; color:#1896d3;}
 a:hover{text-decoration:underline; color:#1896d3;}
 
 #container {
@@ -157,22 +161,10 @@ textarea {
   line-height:21px;
 }
 
-.choices-header, .section-header {
-  color:#666;
-  font-size:32px;
+#question {
 
-  p {
-    font-size:17px;
-  }
 }
-.choices-box, .section-box {
-	margin-bottom:16px;
 
-   ul {
-    margin:0;
-    padding:0;
-  }
-}
 #signup-box li {
   float:left;
   padding:11px;
@@ -184,51 +176,61 @@ textarea {
   line-height:24px;
 }
 
-.choice {
-	padding:10px;
-	margin:5px 0;
-	// width:500px;
-	background-color: #EEE;
-	border:1px solid #CCC;
-	border-radius: 2px;
-	-moz-border-radius: 2px;
+.suggestion {
+  overflow:hidden;
+  font-size:15px;
+  font-weight:300;
+  margin-bottom:30px;
 
-  &:hover, &:active, &.selected {
-    background-color: #5AC8FF;
-    border:1px solid #999;
+  .image {
+  }
+  .title {
+    padding-right:20px;
+  }
+  .actions{
+    float:left;
+  }
+  .description {
+    text-indent:30px;
+  }
+  .link {
+    font-size:17px;
+    font-weight:400;
   }
 }
 
-.suggestion {
-  padding:10px;
-  margin:10px 0 10px 0;
-  // width:500px;
-  background-color: #EEE;
-  border:1px solid #CCC;
-  border-radius: 2px;
-  -moz-border-radius: 2px;
-  overflow:hidden;
-  font-size:17px;
-  font-weight:400px;
+#question {
+  padding-top:30px;
+  font-size:32px;
+}
 
-  .description {
-    display:none;
-    clear:both;
-    padding-top:10px;
+#question ul {
+  float:left;
+  margin:0 5px;
+  padding:0;
+}
 
-    .image {
-      float:left;
-      padding:0 10px 0 0;
-    }
-    .text {
-      font-size:15px;
-    }
-    .link {
-      padding:20px 20px 0 0;
-      float:right;
-      font-size:17px;
-      font-weight:500;
-    }
+#question li {
+  // display:none;
+  margin:0 0 20px 0;
+  padding:0 10px;
+}
+
+#question li:first {
+  // display:show;
+}
+
+.choice {
+  color: #5AC8FF;
+  background-color:#EEE;
+
+  &:active, &.selected {
+    color: #333;
+    border-bottom:1px solid #5AC8FF;
+    background-color:#FFF;
   }
 
+  &:hover {
+    color: #333;
+  }
 }

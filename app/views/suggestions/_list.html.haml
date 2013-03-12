@@ -1,0 +1,17 @@
+- @suggestions.each do |suggestion|
+  .suggestion{"data-suggestion-id" => suggestion.id, "data-suggestion-weight" => suggestion.weight}
+    .image.grid-15
+      %img{:src => suggestion.image}
+    .title.grid-60
+      %h2= suggestion.idea
+      .description
+        = suggestion.description
+    .actions.grid-25
+      %span.link
+        %a.btn.btn-large{:href => suggestion.link}
+          %i.icon-play.icon-large 
+          &nbsp;watch it now
+      %span.link
+        %a.btn.btn-large{:href => suggestion.link}
+          %i.icon-trash.icon-large 
+          = "&nbsp;remove from #{suggestion.provider}".html_safe

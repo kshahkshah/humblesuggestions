@@ -24,31 +24,32 @@ $(document).ready(function(){
 			type: 		'POST',
 			url: 			'/suggestions',
 			data: 		{ time: time, loc: loc, longitude: longitude, latitude: latitude },
-			dataType: 'json'
+			dataType: 'html'
 		}).success(function(data){
-			$.each(data, function(index, suggestion) {
-				suggestions_box.append(
-					$("<div>")
-					.attr('class', 'suggestion')
-					.data('suggestion-id', suggestion.id)
-					.data('suggestion-weight', suggestion.weight)
-					.html(suggestion.idea).append(
-						$("<div class='description'>")
-						.append(
-							$("<div>").attr('class','image')
-							.append(
-								$("<img>").attr('src', suggestion.image)
-							)
-						)
-						.append(
-							$("<div>")
-							.attr('class', 'text')
-							.html(suggestion.description + "<br /><span class='link'><a href='"+suggestion.link+"'>click to watch it now</a></span>")
-						)
-					)
-				)
-			});
-			$(".suggestion:first").children().show();
+			suggestions_box.html(data);
+			// $.each(data, function(index, suggestion) {
+			// 	suggestions_box.append(
+			// 		$("<div>")
+			// 		.attr('class', 'suggestion')
+			// 		.data('suggestion-id', suggestion.id)
+			// 		.data('suggestion-weight', suggestion.weight)
+			// 		.html(suggestion.idea).append(
+			// 			$("<div class='description'>")
+			// 			.append(
+			// 				$("<div>").attr('class','image')
+			// 				.append(
+			// 					$("<img>").attr('src', suggestion.image)
+			// 				)
+			// 			)
+			// 			.append(
+			// 				$("<div>")
+			// 				.attr('class', 'text')
+			// 				.html(suggestion.description + "<br /><span class='link'><a href='"+suggestion.link+"'>click to watch it now</a></span>")
+			// 			)
+			// 		)
+			// 	)
+			// });
+			// $(".suggestion:first").children().show();
 		});
 
 		suggestions_box.show(500, 'linear');

@@ -1,21 +1,15 @@
-.grid-100#time.section
-  .choices-header#time-choices-header
-    %h2 How much time do you have?
-  .choices-box#time-choices-box
-    %ul
-      %li.choice{"data-choice-type" => "time", "data-choice" => "5"} a few minutes
-      %li.choice{"data-choice-type" => "time", "data-choice" => "15"} roughly 15 minutes
-      %li.choice{"data-choice-type" => "time", "data-choice" => "30"} around half an hour
-      %li.choice{"data-choice-type" => "time", "data-choice" => "60"} around an hour
-      %li.choice{"data-choice-type" => "time", "data-choice" => "180"} 2-3 hours
+.grid-100.section#question
+  %span{:style => 'float:left;'} I have   
+  %ul#time
+    %li.choice{"data-choice-type" => "time", "data-choice" => "5"} a few minutes
+    %li.choice{"data-choice-type" => "time", "data-choice" => "15"} roughly 15 minutes
+    %li.choice{"data-choice-type" => "time", "data-choice" => "30"} around half an hour
+    %li.choice{"data-choice-type" => "time", "data-choice" => "60"} around an hour
+    %li.choice{"data-choice-type" => "time", "data-choice" => "180"} 2-3 hours
+  %span{:style => 'float:left;'} and I am 
+  %ul#location
+    %li.choice{"data-choice-type" => "location", "data-choice" => "home"} at home.
+    %li.choice{"data-choice-type" => "location", "data-choice" => "work"} taking a break.
+    %li.choice{"data-choice-type" => "location", "data-choice" => "work"} working.
 
-.grid-100#location.section
-  .choices-header#location-choices-header
-    %h2 Where are you?
-  .choices-box#location-choices-box
-    %ul
-      %li.choice{"data-choice-type" => "location", "data-choice" => "home"} home
-      %li.choice{"data-choice-type" => "location", "data-choice" => "work"} work
-      %li.choice{"data-choice-type" => "location", "data-choice" => "commuting"} commuting
-
-.grid-100#suggestions
+#suggestions
