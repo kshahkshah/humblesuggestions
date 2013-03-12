@@ -17,20 +17,27 @@
         There was a problem with your email address. Please make sure it entered properly and that you have not already registered.
     - if resource.errors.messages.has_key?(:signup_code)
       %p.error
-        You need to use a valid signup code until registration is opened for all. <a href='mailto:me@kunalashah.com'>Ask me for one</a>.
+        You need to use a valid signup code until registration is open to the public.
+        %br
+        <a href='mailto:me@kunalashah.com'>Ask me for one</a>.
     - if resource.errors.messages.has_key?(:password)
       %p.error
         Please enter a valid password and try again.
-    = f.email_field :email, :id => 'new_email', :placeholder => 'enter your email to get started or...', :class => (resource.errors.messages.has_key?(:email) ? 'error_field' : '')
-    = f.password_field :password, :id => 'new_password', :placeholder => 'enter a password', :class => (resource.errors.messages.has_key?(:password) ? 'error_field' : '')
-    = f.text_field :signup_code, :id => 'new_signup_code', :placeholder => 'sign up code', :class => (resource.errors.messages.has_key?(:signup_code) ? 'error_field' : '')
-    = f.submit :value => "Join", :class => 'btn btn-primary btn-large'
+    %fieldset
+      = f.email_field :email, :id => 'new_email', :placeholder => 'enter your email to get started or...'
+    %fieldset
+      = f.password_field :password, :id => 'new_password', :placeholder => 'enter a password'
+    %fieldset
+      = f.text_field :signup_code, :id => 'new_signup_code', :placeholder => 'sign up code'
+      = f.submit :value => "Join", :class => 'btn btn-primary btn-large'
 
   %br
   %h3 Already humbled? Sign in
   = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-    = f.email_field :email, :id => 'email', :placeholder => 'enter your email'
-    = f.password_field :password, :id => 'password', :placeholder => 'enter your password'
-    = f.submit :value => "Sign In", :class => 'btn btn-large'
-    %br
-    = link_to "Forgot your password?", new_password_path(resource_name)
+    %fieldset
+      = f.email_field :email, :id => 'email', :placeholder => 'enter your email'
+    %fieldset
+      = f.password_field :password, :id => 'password', :placeholder => 'enter your password'
+      = f.submit :value => "Sign In", :class => 'btn btn-large'
+    %fieldset
+      = link_to "Forgot your password?", new_password_path(resource_name)

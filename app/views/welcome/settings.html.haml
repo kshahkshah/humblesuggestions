@@ -18,31 +18,32 @@
   .grid-100.mobile-grid-100
     If you want something added that you don't see below, please <a href="mailto:me@kunalashah.com"> contact me</a>.
 
-.section.grid-100.mobile-grid-100
-  %h2 Account
+- unless params[:initial]
+  .section.grid-100.mobile-grid-100
+    %h2 Account
+    = link_to 'Click here to logout', destroy_user_session_path, :class => 'deep', :method => :delete
+    = form_for(current_user, :as => :user, :url => registration_path(current_user), :html => { :method => :put }) do |f|
+      = devise_error_messages!
 
-  = form_for(current_user, :as => :user, :url => registration_path(current_user), :html => { :method => :put }) do |f|
-    = devise_error_messages!
-
-    %fieldset
-      = f.label :email
-      %br
-      = f.email_field :email
-    %fieldset
-      = f.label :password
-      %br
-      %i (leave blank if you don't want to change it)
-      %br
-      = f.password_field :password, :autocomplete => "off"
-    %fieldset
-      = f.label :password_confirmation
-      %br
-      = f.password_field :password_confirmation
-    %fieldset
-      = f.label :current_password
-      %br
-      %i (we need your current password to confirm your changes)
-      %br
-      = f.password_field :current_password
-    %fieldset
-      = f.submit "Update"
+      %fieldset
+        = f.label :email
+        %br
+        = f.email_field :email
+      %fieldset
+        = f.label :password
+        %br
+        %i (leave blank if you don't want to change it)
+        %br
+        = f.password_field :password, :autocomplete => "off"
+      %fieldset
+        = f.label :password_confirmation
+        %br
+        = f.password_field :password_confirmation
+      %fieldset
+        = f.label :current_password
+        %br
+        %i (we need your current password to confirm your changes)
+        %br
+        = f.password_field :current_password
+      %fieldset
+        = f.submit "Update", :class => 'btn btn-large btn-primary'

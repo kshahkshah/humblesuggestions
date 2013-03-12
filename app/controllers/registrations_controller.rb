@@ -1,4 +1,4 @@
-  class RegistrationsController < Devise::RegistrationsController
+class RegistrationsController < Devise::RegistrationsController
   # ripped entirely, but with a change of redirect
   def update
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
@@ -22,9 +22,10 @@
     @user = User.new(params[:user])
 
     if @user.save
-      redirect_to 'welcome/services'
+      sign_in :user, @user, :bypass => true
+      redirect_to '/settings?initial=true'
     else
-      render 'welcome/index'
+      render '/welcome/index'
     end
   end
 end

@@ -91,28 +91,20 @@ span {
 input[type="text"], input[type="email"], input[type="password"] {
 	font-size:17px;
   font-weight:300;
-	padding:10px;
-	margin:5px 0;
-	// width:500px;
+	padding:11px;
+	margin:0;
 	background-color: hsl(0, 0, 98);
 	border:1px solid hsl(0, 0, 80);
 	border-radius: 3px;
 	-moz-border-radius: 3px;
+  vertical-align:middle;
 }
 
-input[type="email"].error_field, input[type="password"].error_field, input[type="text"].error_field {
-  border:1px solid #FF0000;
-}
-
-input[type="submit"] {
-	font-size:24px;
-	padding:10px;
-	margin:5px 0;
-	// width:521px;
-	background-color: #EEE;
-	border:1px solid #CCC;
-	border-radius: 4px;
-	-moz-border-radius: 4px;
+.field_with_errors {
+  display:inline;
+  input[type="email"], input[type="password"], input[type="text"] {
+    border:1px solid #FF0000;
+  }
 }
 
 p {
@@ -130,8 +122,8 @@ form {
 }
 fieldset {
   border:0;
-  padding:0 0 10px 0;
-  margin:0;
+  padding:0;
+  margin:0 0 5px 0;
 }
 fieldset i{
   font-size:12px;
