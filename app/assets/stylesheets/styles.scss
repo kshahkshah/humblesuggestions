@@ -214,12 +214,16 @@ textarea {
 
 .choice {
   color: #5AC8FF;
-  background-color:#EEE;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  background-color: hsl(0, 0, 96);
 
   &:active, &.selected {
     color: #333;
     border-bottom:1px solid #5AC8FF;
     background-color:#FFF;
+    border-radius: 0px;
+    -moz-border-radius: 0px;
   }
 
   &:hover {
