@@ -181,13 +181,18 @@ textarea {
   }
   .actions{
     float:left;
+
+    .btn {
+      margin-bottom:10px;
+    }
+
+    .link {
+      font-size:17px;
+      font-weight:400;
+    }
   }
   .description {
     text-indent:30px;
-  }
-  .link {
-    font-size:17px;
-    font-weight:400;
   }
 }
 
