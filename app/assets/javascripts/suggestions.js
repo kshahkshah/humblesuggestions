@@ -27,29 +27,6 @@ $(document).ready(function(){
 			dataType: 'html'
 		}).success(function(data){
 			suggestions_box.html(data);
-			// $.each(data, function(index, suggestion) {
-			// 	suggestions_box.append(
-			// 		$("<div>")
-			// 		.attr('class', 'suggestion')
-			// 		.data('suggestion-id', suggestion.id)
-			// 		.data('suggestion-weight', suggestion.weight)
-			// 		.html(suggestion.idea).append(
-			// 			$("<div class='description'>")
-			// 			.append(
-			// 				$("<div>").attr('class','image')
-			// 				.append(
-			// 					$("<img>").attr('src', suggestion.image)
-			// 				)
-			// 			)
-			// 			.append(
-			// 				$("<div>")
-			// 				.attr('class', 'text')
-			// 				.html(suggestion.description + "<br /><span class='link'><a href='"+suggestion.link+"'>click to watch it now</a></span>")
-			// 			)
-			// 		)
-			// 	)
-			// });
-			// $(".suggestion:first").children().show();
 		});
 
 		suggestions_box.show(500, 'linear');
@@ -79,22 +56,6 @@ $(document).ready(function(){
 				getSuggestions();
 
 			}
-
-		}
-	});
-
-	$("#suggestions").on('click', '.suggestion', function() {
-		suggestion = $(this);
-
-		if (suggestion.hasClass('selected')) {
-			suggestion.removeClass('selected');
-			suggestion.children().hide();
-
-		} else {
-			suggestion.siblings().removeClass('selected');
-			suggestion.siblings().children().hide();
-			suggestion.addClass('selected');
-			suggestion.children().show();
 
 		}
 	});
