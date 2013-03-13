@@ -37,8 +37,6 @@ class NetflixQueueProcessor
           content_items.save
         end
       else
-       debugger
-
         puts "new content, creating"
         ContentItem.create({
           user_id:          @user.id,
