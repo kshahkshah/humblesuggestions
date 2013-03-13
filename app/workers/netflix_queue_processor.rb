@@ -25,15 +25,15 @@ class NetflixQueueProcessor
       # obviously this is dirty...
       map = disc.send(:instance_variable_get, :@map)
 
-      if suggestion = ContentItem.find_by_content_id(disc.id)
-        suggestion.title = self.clean(disc.title.to_s)
-        suggestion.description = self.clean(map["link"].select{|l|l["synopsis"]}.first["synopsis"].to_s)
-        suggestion.image = map["box_art"]["large"]
-        suggestion.rating = disc.average_rating
-        suggestion.position = disc.position
-        if suggestion.changed?
+      if content_items = @user.content_items.where(content_id: disc.id).first
+        content_items.title = self.clean(disc.title.to_s)
+        content_items.description = self.clean(map["link"].select{|l|l["synopsis"]}.first["synopsis"].to_s)
+        content_items.image = map["box_art"]["large"]
+        content_items.rating = disc.average_rating.to_s
+        content_items.position = disc.position.to_s
+        if content_items.changed?
           puts "changed, saving"
-          suggestion.save
+          content_items.save
         end
       else
         puts "new content, creating"
@@ -59,23 +59,16 @@ class NetflixQueueProcessor
     # any suggestions no longer on the queue have been watched or removed.
     old_suggestions.each do |old_suggestion_content_id|
       puts "old content, marking"
-      suggested = ContentItem.where(user_id: @user.id).where(content_id: old_suggestion_content_id).first
-      suggested.status = 'removed'
-      suggested.save
+      content_item = ContentItem.where(user_id: @user.id).where(content_id: old_suggestion_content_id).first
+      suggestion = SuggestionTrack.where(user_id: @user.id).where(content_item_id: content_item.id).last
+      if suggestion
+        suggestion.status = 'removed'
+        suggestion.save
+      end
     end
 
-    # Going to disable this for now...
-    # get some stats
-    # stddev_ratings = all_ratings.to_scale.sd
-    # mean_ratings = all_ratings.to_scale.mean
-    # stddev_times = all_times.to_scale.sd
-    # mean_times = all_times.to_scale.mean
-
-    # great, so let's rank
-
-    # and save!
+    # and update user!
     @user.netflix_status = "processed"
     @user.save
-
   end
 end

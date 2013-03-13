@@ -47,7 +47,7 @@ class Suggestion < Array
     # then the suggestions
     @user.content_items.joins('LEFT OUTER JOIN suggestion_tracks ON suggestion_tracks.content_item_id = content_items.id AND suggestion_tracks.user_id = content_items.user_id').
       select('content_items.*, SQRT(content_items.position*10) * content_items.rating^2 as weight').
-      where('suggestion_tracks.id is null or suggestion_tracks.on < (?)', 30.days.ago).
+      where('suggestion_tracks.id is null or (suggestion_tracks.status <> "removed" and suggestion_tracks.on < (?))', 30.days.ago).
       order('weight desc').limit(@limit).each do |item|
 
       suggestions << OpenStruct.new({

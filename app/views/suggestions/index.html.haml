@@ -9,13 +9,13 @@
       ); 
     </script>
 
-
-%table{:class => "tablesorter", :id => "suggestions"}
-  %thead
-    %th Title
-    %th Weighting
-  %tbody
-    - @suggestions.each do |suggestion|
-      %tr
-        %td= suggestion.title
-        %td= suggestion.weight
+.grid-100
+  %table{:class => "tablesorter", :id => "suggestions"}
+    %thead
+      %th Title
+      %th Weighting
+    %tbody
+      - @suggestions.each do |suggestion|
+        %tr
+          %td= suggestion.idea
+          %td= suggestion.weight
