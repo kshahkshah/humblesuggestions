@@ -24,8 +24,9 @@ class NetflixQueueProcessor
 
       # obviously this is dirty...
       map = disc.send(:instance_variable_get, :@map)
+      disc_id = disc.id.split('/').last
 
-      if content_items = @user.content_items.where(content_id: disc.id).first
+      if content_items = @user.content_items.where(content_id: disc_id).first
         content_items.title = self.clean(disc.title.to_s)
         content_items.description = self.clean(map["link"].select{|l|l["synopsis"]}.first["synopsis"].to_s)
         content_items.image = map["box_art"]["large"]
@@ -36,12 +37,14 @@ class NetflixQueueProcessor
           content_items.save
         end
       else
+       debugger
+
         puts "new content, creating"
         ContentItem.create({
           user_id:          @user.id,
           content_type:     'video',
           content_provider: 'netflix',
-          content_id:       disc.id,
+          content_id:       disc_id,
           title:            self.clean(disc.title.to_s),
           description:      self.clean(map["link"].select{|l|l["synopsis"]}.first["synopsis"].to_s),
           image:            map["box_art"]["large"],
@@ -50,7 +53,7 @@ class NetflixQueueProcessor
         })
       end
 
-      old_suggestions = old_suggestions - [disc.id]
+      old_suggestions = old_suggestions - [disc_id]
 
       all_ratings << disc.average_rating
       all_times   << disc.updated
