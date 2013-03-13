@@ -3,7 +3,6 @@ require 'resque/server'
 Humblesuggestions::Application.routes.draw do
   mount Resque::Server, :at => "/admin/queues"
 
-  resources :ideas
   resources :suggestions
 
   devise_for :users, :controllers => {:registrations => "registrations"}
