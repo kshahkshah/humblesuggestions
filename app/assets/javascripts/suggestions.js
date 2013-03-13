@@ -53,8 +53,8 @@ $(document).ready(function(){
 			};
 
 			if(loc && time) {
+				mixpanel.track('Suggestions Requested', {'time': time, 'location': loc});
 				getSuggestions();
-
 			}
 
 		}
