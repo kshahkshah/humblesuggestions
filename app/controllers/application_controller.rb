@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   after_filter :update_user_if_user
   protect_from_forgery
-  helper_method :resource, :resource_name, :devise_mapping
+  helper_method :resource, :resource_name, :devise_mapping, :tracking
 
   def update_user_if_user
     if current_user
@@ -31,4 +31,9 @@ class ApplicationController < ActionController::Base
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
+
+  def tracking
+    @track ? "<script>mixpanel.track('#{@track}');</script>".html_safe : nil
+  end
+
 end
