@@ -36,22 +36,6 @@ class Suggestion < Array
       end
     end
 
-    # now find matching activities
-    
-    # apply hard filters first...
-
-    # use time context first
-    # time_required = ContextOption
-    #   .where(:context_id => Context.time_required.id)
-    #   .where(:name => time)
-
-    # time_appropriate_idea_weights = IdeaWeight
-    #   .where(:context_option_id => time_required.id)
-    #   .where('weight > 0')
-
-    # Idea.where().each do |idea|
-    # end
-
     # return matching activities in a weight-ranked array
     suggestions =  Suggestion.new
 
