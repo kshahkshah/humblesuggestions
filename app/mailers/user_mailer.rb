@@ -12,12 +12,16 @@ class UserMailer < ActionMailer::Base
     @suggestion = @suggestions.first
     @title = "Here's an idea for tonight..."
 
-    @track = SuggestionTrack.new({
+    @track = SuggestionTrack.create({
       user_id: @user.id, 
       content_item_id: @suggestion.item_id,
       via: 'email',
       on:  Time.now
-    }).save
+    })
+    @tracking_pixel = Mixpanel.tracking_pixel('Daily Suggestion Opened', {
+      suggestion_track_id: @track.id,
+      distinct_id:         @user.id,
+    })
 
     mail(to: @user.email, subject: @title)
   end

@@ -53,3 +53,5 @@
         = f.password_field :current_password
       %fieldset
         = f.submit "Update", :class => 'btn btn-large btn-primary'
+
+= "<script>mixpanel.alias('#{current_user.id}');</script>".html_safe
