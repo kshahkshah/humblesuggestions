@@ -1,6 +1,7 @@
 set :application, "humblesuggestions"
 set :repository,  "git@github.com:whistlerbrk/humblesuggestions.git"
 set :deploy_to, '/var/www/humblesuggestions'
+set :ssh_options, { :forward_agent => true }
 
 set :scm, :git
 set :user, 'deploy'
