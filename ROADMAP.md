@@ -41,6 +41,9 @@ in no order save youtube/instapaper
 * reddit
 
 ## suggestions ##
+* enable the time filter
+* enable the location filter
+  * provider is tagged with acceptable locations
 * integrate feedback
 * split testing
 
